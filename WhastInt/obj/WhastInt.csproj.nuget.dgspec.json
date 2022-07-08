@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\projects\\WhastInt\\WhastInt\\WhastInt.csproj": {}
+    "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\WhastInt.csproj": {}
   },
   "projects": {
-    "C:\\projects\\WhastInt\\WhastInt\\WhastInt.csproj": {
+    "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\WhastInt.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\projects\\WhastInt\\WhastInt\\WhastInt.csproj",
+        "projectUniqueName": "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\WhastInt.csproj",
         "projectName": "WhastInt",
-        "projectPath": "C:\\projects\\WhastInt\\WhastInt\\WhastInt.csproj",
-        "packagesPath": "C:\\Users\\Leonardo\\.nuget\\packages\\",
-        "outputPath": "C:\\projects\\WhastInt\\WhastInt\\obj\\",
+        "projectPath": "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\WhastInt.csproj",
+        "packagesPath": "C:\\Users\\agger\\.nuget\\packages\\",
+        "outputPath": "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Leonardo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\agger\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
