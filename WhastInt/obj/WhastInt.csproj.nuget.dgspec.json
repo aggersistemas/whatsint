@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\WhastInt.csproj": {}
+    "C:\\Users\\Victor\\Desktop\\HackDay\\WhastInt\\WhastInt.csproj": {}
   },
   "projects": {
-    "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\WhastInt.csproj": {
+    "C:\\Users\\Victor\\Desktop\\HackDay\\WhastInt\\WhastInt.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\WhastInt.csproj",
+        "projectUniqueName": "C:\\Users\\Victor\\Desktop\\HackDay\\WhastInt\\WhastInt.csproj",
         "projectName": "WhastInt",
-        "projectPath": "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\WhastInt.csproj",
-        "packagesPath": "C:\\Users\\agger\\.nuget\\packages\\",
-        "outputPath": "C:\\AggerProjetos\\Hackday\\whatsint\\WhastInt\\obj\\",
+        "projectPath": "C:\\Users\\Victor\\Desktop\\HackDay\\WhastInt\\WhastInt.csproj",
+        "packagesPath": "C:\\Users\\Victor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Victor\\Desktop\\HackDay\\WhastInt\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\agger\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Victor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +43,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "MvvmBlazor": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
+            "Photino.NET": {
+              "target": "Package",
+              "version": "[2.1.11, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
