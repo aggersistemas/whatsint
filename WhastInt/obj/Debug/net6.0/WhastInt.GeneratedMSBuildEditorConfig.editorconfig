@@ -8,61 +8,61 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WhastInt
 build_property.RootNamespace = WhastInt
-build_property.ProjectDir = C:\Users\Victor\Desktop\HackDay\WhastInt\
+build_property.ProjectDir = C:\AggerHackday\WhatsInt\WhastInt\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Victor\Desktop\HackDay\WhastInt
+build_property.MSBuildProjectDirectory = C:\AggerHackday\WhatsInt\WhastInt
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/App.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Pages/Counter.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Pages/FetchData.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Shared/SurveyPrompt.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Views/InteractionView.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/Views/InteractionView.razor]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW50ZXJhY3Rpb25WaWV3LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Views/LoginView.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/Views/LoginView.razor]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5WaWV3LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Views/UserView.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/Views/UserView.razor]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclZpZXcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/_Imports.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Shared/MainLayout.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-hr7eodtevh
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Shared/NavMenu.razor]
+[C:/AggerHackday/WhatsInt/WhastInt/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-8mn10ak06d
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Pages/Error.cshtml]
+[C:/AggerHackday/WhatsInt/WhastInt/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Pages/_Host.cshtml]
+[C:/AggerHackday/WhatsInt/WhastInt/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Victor/Desktop/HackDay/WhastInt/Pages/_Layout.cshtml]
+[C:/AggerHackday/WhatsInt/WhastInt/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
