@@ -13,11 +13,11 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
 
             //webApplicationBuilder.Services.Configure<DatabaseSettings>(configurationSection);
 
-            //webApplicationBuilder
-            //    .AddSerilog()
-            //    .AddSwagger()
-            //    .AddAuthentication()
-            //    .AddAuthorization();
+            webApplicationBuilder
+                .AddSerilog()
+                .AddSwagger()
+                .AddAuthentication()
+                .AddAuthorization();
 
             webApplicationBuilder.Services
                 .AddHttpContextAccessor()
