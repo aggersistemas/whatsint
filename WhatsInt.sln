@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt.Interface", "WhatsInt.Interface\WhatsInt.Interface.csproj", "{39169FB3-2231-4484-93BA-67DD97579776}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Whatsint.Model", "Whatsint.Model\Whatsint.Model.csproj", "{D0208CCA-EF46-4573-8492-2ED59AC2EAAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt.Model", "Whatsint.Model\WhatsInt.Model.csproj", "{D0208CCA-EF46-4573-8492-2ED59AC2EAAA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt.Infrastructure", "WhatsInt.Infrastructure\WhatsInt.Infrastructure.csproj", "{09CF2FCC-9A73-481C-A380-7F32A3126E5F}"
 EndProject

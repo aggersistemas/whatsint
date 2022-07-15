@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Whatsint.Model.Generic
+namespace WhatsInt.Model.Generic
 {
     public class InteractDto : BaseDto
     {

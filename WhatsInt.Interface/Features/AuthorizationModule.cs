@@ -1,5 +1,5 @@
 ﻿using Carter;
-using Whatsint.Model;
+using WhatsInt.Model;
 using WhatsInt.Interface.Services;
 
 namespace WhatsInt.Interface.Features

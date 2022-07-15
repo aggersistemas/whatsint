@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Repository;
 using WhatsInt.Infrastructure.Entities;
-using Whatsint.Model;
+using WhatsInt.Model;
 
 namespace WhatsInt.Interface.Services
 {

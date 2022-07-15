@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Whatsint.Model.Generic;
+using WhatsInt.Model.Generic;
 
-namespace Whatsint.Model
+namespace WhatsInt.Model
 {
     public class UserDto : InteractDto
     {

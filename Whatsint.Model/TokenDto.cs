@@ -1,4 +1,4 @@
-﻿namespace Whatsint.Model
+﻿namespace WhatsInt.Model
 {
     public class TokenDto
     {
