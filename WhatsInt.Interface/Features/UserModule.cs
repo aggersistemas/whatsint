@@ -1,5 +1,5 @@
 ﻿using Carter;
-using WhasInt.Infrastructure.Entities;
+using WhatsInt.Infrastructure.Entities;
 using Whatsint.Model;
 using WhatsInt.Interface.Services;
 

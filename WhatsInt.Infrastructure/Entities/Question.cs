@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WhasInt.Infrastructure.Entities.Generic;
+using WhatsInt.Infrastructure.Entities.Generic;
 
-namespace WhasInt.Infrastructure.Entities
+namespace WhatsInt.Infrastructure.Entities
 {
     public class Question : Interact
     {

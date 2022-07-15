@@ -1,5 +1,5 @@
 ﻿using Infrastructure.Repository;
-using WhasInt.Infrastructure.Entities;
+using WhatsInt.Infrastructure.Entities;
 using Whatsint.Model;
 
 namespace WhatsInt.Interface.Services

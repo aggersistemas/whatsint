@@ -3,7 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using WhasInt.Infrastructure.Entities;
+using WhatsInt.Infrastructure.Entities;
 using Whatsint.Model;
 using WhatsInt.Interface.Helpers;
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WhasInt.Infrastructure.Entities
+namespace WhatsInt.Infrastructure.Entities
 {
     public class User : Entity
     {
