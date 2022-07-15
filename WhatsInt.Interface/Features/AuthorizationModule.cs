@@ -15,9 +15,9 @@ namespace WhatsInt.Interface.Features
 
         private async Task<IResult> Auth(HttpContext context, AuthorizationService service, UserDto user)
         {
-            var teste = await service.Authorize();
+            var bearer = await service.Authorize();
 
-            return true ? Results.Ok() : Results.Unauthorized();
+            return bearer != null ? Results.Ok() : Results.Unauthorized();
         }
     }
 }
