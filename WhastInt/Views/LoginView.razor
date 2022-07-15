@@ -2,20 +2,19 @@
 @page "/LoginView"
 
 <div class="background">
-    <div class="shape"></div>
-    <div class="shape"></div>
 </div>
 <form>
-    <h3>Login</h3>
+    <h3>WhatsInt</h3>
 
-    <label for="username" class="Descricao">Usuario</label>
-    <input type="text" placeholder="Nome de Usuario" id="username">
+    <label for="username" class="Descricao">E-mail</label>
+    <input type="text" placeholder="E-mail do Usuario" id="username" @bind-value="user">
 
     <label for="password" class="Descricao">Senha</label>
-    <input type="password" placeholder="Senha" id="password">
+    <input type="password" placeholder="Senha" id="password" @bind-value="password">
 
     <button @onclick="LoginButtonClick">Log In</button>
 </form>
+
 <div class="DevelopedByAgger" href="https://agger.com.br/">
     <a href="https://agger.com.br/">
         <img src="css/Images/LogoAgger.jpg" alt="Logo da empresa Agger">
