@@ -11,14 +11,7 @@ namespace WhatsInt.Interface.Features
         {
             const string basePath = "/user";
 
-            app.MapPost($"{basePath}/login", Login).AllowAnonymous();
-        }
-
-        private async Task<IResult> Login(HttpContext context, UserService userService, UserDto user)
-        {
-            await userService.Login(user);
-
-            return user.Id.Length > 0 ? Results.Ok(user) : Results.Unauthorized();
-        }
+            //app.MapPost($"{basePath}/login", Login).AllowAnonymous();
+        }     
     }
 }

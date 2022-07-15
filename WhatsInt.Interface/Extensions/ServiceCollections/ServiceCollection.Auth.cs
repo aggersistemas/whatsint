@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
-
+using System.Text;
 
 namespace WhatsInt.Interface.Extensions.ServiceCollections
 {
@@ -9,6 +9,8 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
     {
         public static WebApplicationBuilder AddAuthentication(this WebApplicationBuilder webApplicationBuilder)
         {
+            const string token = "AggerPassword";
+
             var authenticationBuilder = webApplicationBuilder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -22,7 +24,7 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    //IssuerSigningKey = new SymmetricSecurityKey(new byte[]{}), //TODO: ADD SECRET
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(token)), 
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
