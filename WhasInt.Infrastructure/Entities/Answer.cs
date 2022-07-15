@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace WhasInt.Infrastructure.Entities.Generic
 {
-    public class Interact : Entity
+    public class Answer : Interact
     {
-        public string Description { get; set; }
-
-        public string Order { get; set; }
-
+        public string IdQuestion { get; set; }
+        public string IdNextQuestion { get; set; }
     }
 }
