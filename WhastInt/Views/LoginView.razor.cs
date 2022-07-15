@@ -2,8 +2,7 @@
 {
     public partial class LoginView
     {
-
-        public void LoginButton_Click()
+        public void LoginButtonClick()
         {
 
         }
