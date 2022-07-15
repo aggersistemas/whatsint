@@ -20,8 +20,8 @@
 }
 
 form {
-    height: 450px;
-    width: 400px;
+    height: auto;
+    width: auto;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
@@ -32,6 +32,7 @@ form {
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
+    padding-top:10px;
 }
 
     form * {
@@ -85,9 +86,13 @@ button {
 }
 
 .DevelopedByAgger {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    height: auto;
+    height: 17%;
     text-align: center;
+}
+
+.LoginLabel {
+    font-size: 12px;
 }
