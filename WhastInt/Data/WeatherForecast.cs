@@ -1,4 +1,4 @@
-namespace WhastInt.Data
+namespace WhatsInt.Data
 {
     public class WeatherForecast
     {

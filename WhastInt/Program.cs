@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using WhastInt.Data;
+using WhatsInt.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

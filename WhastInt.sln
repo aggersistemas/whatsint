@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhastInt", "WhastInt\WhastInt.csproj", "{29DA5F3E-BAC7-46B8-A6E1-7ED731603028}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt", "WhastInt\WhatsInt.csproj", "{29DA5F3E-BAC7-46B8-A6E1-7ED731603028}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhasInt.Infrastructure", "WhasInt.Infrastructure\WhasInt.Infrastructure.csproj", "{4B058371-C5CD-470F-9616-091538815C0F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt.Interface", "WhatsInt.Interface\WhatsInt.Interface.csproj", "{39169FB3-2231-4484-93BA-67DD97579776}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatsint.Model", "Whatsint.Model\Whatsint.Model.csproj", "{D0208CCA-EF46-4573-8492-2ED59AC2EAAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Whatsint.Model", "Whatsint.Model\Whatsint.Model.csproj", "{D0208CCA-EF46-4573-8492-2ED59AC2EAAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

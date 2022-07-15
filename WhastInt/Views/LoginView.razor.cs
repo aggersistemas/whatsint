@@ -1,4 +1,4 @@
-﻿namespace WhastInt.Views
+﻿namespace WhatsInt.Views
 {
     public partial class LoginView
     {
