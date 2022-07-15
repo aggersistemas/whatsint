@@ -1,5 +1,8 @@
 ﻿using Carter;
+using Infrastructure.Models;
+using Infrastructure.Repository;
 using Microsoft.Extensions.Options;
+using WhatsInt.Interface.Services;
 
 namespace WhatsInt.Interface.Extensions.ServiceCollections
 {
@@ -7,11 +10,11 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
     {
         public static WebApplicationBuilder Configure(this WebApplicationBuilder webApplicationBuilder)
         {
-            //const string settingsName = nameof(DatabaseSettings);
+            const string settingsName = nameof(DatabaseSettings);
 
-            //var configurationSection = webApplicationBuilder.Configuration.GetSection(settingsName);
+            var configurationSection = webApplicationBuilder.Configuration.GetSection(settingsName);
 
-            //webApplicationBuilder.Services.Configure<DatabaseSettings>(configurationSection);
+            webApplicationBuilder.Services.Configure<DatabaseSettings>(configurationSection);
 
             webApplicationBuilder
                 .AddSerilog()
@@ -30,11 +33,11 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
 
         public static IServiceCollection AddInjections(this IServiceCollection serviceCollection)
         {
-            //serviceCollection.AddSingleton(typeof(IRepository<>), typeof(MongoRepository<>));
+            serviceCollection.AddSingleton(typeof(IRepository<>), typeof(MongoRepository<>));
 
-            //serviceCollection.AddSingleton<LoginService>();
+            serviceCollection.AddSingleton<UserService>();
 
-            //serviceCollection.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            serviceCollection.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             return serviceCollection;
         }

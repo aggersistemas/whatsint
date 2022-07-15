@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\WhasInt.Infrastructure\WhasInt.Infrastructure.csproj" />
+    <ProjectReference Include="..\Whatsint.Model\Whatsint.Model.csproj" />
   </ItemGroup>
 
 </Project>
