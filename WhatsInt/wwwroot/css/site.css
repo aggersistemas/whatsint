@@ -6,6 +6,15 @@ html, body {
     background: linear-gradient(#0A0A2A, #210B61);
 }
 
+.logInForm {
+    margin: 50pt;
+    padding: 50pt;
+    width: 500pt;
+}
+
+.footer {
+    padding: 50pt;
+}
 
 h1:focus {
     outline: none;

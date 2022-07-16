@@ -1,25 +1,32 @@
 ﻿@inherits LayoutComponentBase
 @page "/LoginView"
 
-<div class="background">
-</div>
-<form>
-    <h3>WhatsInt</h3>
 
-    <label for="username" class="Descricao">E-mail</label>
-    <input type="text" placeholder="E-mail do Usuario" id="username" @bind-value="user">
+<form id="logInForm">
+    <div id="title">
+        <h3>WhatsInt</h3>
+    </div>
 
-    <label for="password" class="Descricao">Senha</label>
-    <input type="password" placeholder="Senha" id="password" @bind-value="password">
+    <div id="users">
+        <label for="username" class="Descricao">E-mail</label>
+        <input type="text" placeholder="E-mail do Usuario" id="username" @bind-value="user">
+    </div>
 
-    <label for="password" class="LoginLabel" @onclick="LoginButtonClick"></label>
+    <div id="password">
+        <label for="password" class="Descricao">Senha</label>
+        <input type="password" placeholder="Senha" id="password" @bind-value="password">
+    </div>
+
+    <div id="buttonLogIn">
+    </div>
 
     <button @onclick="LoginButtonClick">Log In</button>
 </form>
 
-
-<div class="DevelopedByAgger" href="https://agger.com.br/">
-    <a href="https://agger.com.br/">
-        <img src="css/Images/LogoAgger.jpg" alt="Logo da empresa Agger">
-    </a>
-</div>
+<footer id="footer">
+    <div class="DevelopedByAgger" href="https://agger.com.br/">
+        <a href="https://agger.com.br/">
+            <img src="css/Images/LogoAgger.jpg" alt="Logo da empresa Agger">
+        </a>
+    </div>
+</footer>
