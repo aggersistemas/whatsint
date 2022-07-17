@@ -18,14 +18,31 @@ namespace WhatsInt.Interface.Services
             _userRepository = userRepository;
             _context = context;
         }
-        internal async Task<object> Authorize()
+        internal async Task<object?> Authorize()
         {
             var authHeader = _context?.HttpContext?.Response.Headers.Authorization.ToString();
 
             if (!authHeader.Contains("Basic"))
                 return null;
 
-            return null;            
+            var basicToken = authHeader.Split(' ')[1].Split(':');
+
+            var userToken =  basicToken[0];
+
+            var passwordToken =  basicToken[1];
+
+            var user = new UserDto { Email = userToken, Password = passwordToken };
+
+            var dbUser = await Login(user);
+
+            return dbUser != null ? GenerateToken(dbUser)  : null;            
+        }
+
+        public async Task<User?> Login(UserDto user)
+        {
+            var userFound = await _userRepository.FindOne(x => x.Email == user.Email);
+
+            return userFound?.Password == user.Password ? userFound : null;
         }
 
         public TokenDto GenerateToken(User credentials)
