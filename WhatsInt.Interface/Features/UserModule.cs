@@ -18,8 +18,7 @@ namespace WhatsInt.Interface.Features
         {
             var newUser = await service.Created(user);
 
-            return newUser == null ? Results.Conflict() :
-                newUser.Id.Length == 0 ? Results.UnprocessableEntity() : Results.Created("", newUser);
+            return Results.Created("", newUser);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Repository;
 using WhatsInt.Infrastructure.Entities;
+using WhatsInt.Interface.Exceptions;
 using WhatsInt.Interface.Helpers;
 using WhatsInt.Model;
 
@@ -16,23 +17,15 @@ namespace WhatsInt.Interface.Services
 
         public async Task<UserDto?> Created(UserDto user)
         {
-            try
-            {
-                var userFound = await FindUserByEmail(user.Email);
+            var userFound = await FindUserByEmail(user.Email);
 
-                if (userFound != null)
-                    return null;
+            if (userFound != null) throw new AppException(System.Net.HttpStatusCode.Conflict, "User already created");
 
-                var userDb = MapperHelper.Map<User>(user);
+            var userDb = MapperHelper.Map<User>(user);
 
-                await _userRepository.Add(userDb);
+            await _userRepository.Add(userDb);
 
-                return MapperHelper.Map<UserDto?>(userDb);
-            }
-            catch (Exception ex)
-            {
-                return new UserDto();
-            }
+            return MapperHelper.Map<UserDto?>(userDb);
         }
 
         public async Task<UserDto?> FindUserByEmail(string email)
