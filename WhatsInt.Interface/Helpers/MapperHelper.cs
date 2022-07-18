@@ -5,8 +5,11 @@ namespace WhatsInt.Interface.Helpers
 {
     public static class MapperHelper
     {
-        public static T Map<T>(object source)
+        public static T Map<T>(object? source)
         {
+            if (source == null)
+                return default!;
+
             var instanceToPopulate = (T)Activator.CreateInstance(typeof(T));
 
             var propertyInfos = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);

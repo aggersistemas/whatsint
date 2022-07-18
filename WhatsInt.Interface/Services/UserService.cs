@@ -18,7 +18,7 @@ namespace WhatsInt.Interface.Services
         {
             try
             {
-                var userFound = await _userRepository.FindOne(x => x.Email == user.Email);
+                var userFound = await FindUserByEmail(user.Email);
 
                 if (userFound != null)
                     return null;
@@ -33,6 +33,13 @@ namespace WhatsInt.Interface.Services
             {
                 return new UserDto();
             }
+        }
+
+        public async Task<UserDto?> FindUserByEmail(string email)
+        {
+            var user = await _userRepository.FindOne(x => x.Email == email);
+
+            return MapperHelper.Map<UserDto?>(user);
         }
 
         public async Task<User?> GetUser(UserDto user)
