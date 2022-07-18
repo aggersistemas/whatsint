@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Repository;
 using WhatsInt.Infrastructure.Entities;
+using WhatsInt.Interface.Helpers;
 using WhatsInt.Model;
 
 namespace WhatsInt.Interface.Services
@@ -13,11 +14,35 @@ namespace WhatsInt.Interface.Services
             _userRepository = userRepository;
         }
 
-        public async Task<object?> Login(UserDto user)
+        public async Task<UserDto?> Created(UserDto user)
+        {
+            try
+            {
+                var userFound = await _userRepository.FindOne(x => x.Email == user.Email);
+
+                if (userFound != null)
+                    return null;
+
+                var userDb = MapperHelper.Map<User>(user);
+
+                await _userRepository.Add(userDb);
+
+                return MapperHelper.Map<UserDto?>(userDb);
+            }
+            catch (Exception ex)
+            {
+                return new UserDto();
+            }
+        }
+
+        public async Task<User?> GetUser(UserDto user)
         {
             var userFound = await _userRepository.FindOne(x => x.Email == user.Email);
 
-            return userFound?.Password == user.Password ? new { Id = userFound.Id, Name = userFound.Name } : null;    
+            if (userFound != null)
+                return null;
+
+            return userFound?.Password == user.Password ? userFound : null;
         }
     }
 }

@@ -11,7 +11,15 @@ namespace WhatsInt.Interface.Features
         {
             const string basePath = "/user";
 
-            //app.MapPost($"{basePath}/login", Login).AllowAnonymous();
-        }     
+            app.MapPost($"{basePath}/create", CreateUser).AllowAnonymous();
+        }
+
+        private async Task<IResult> CreateUser(HttpContext context, UserService service, UserDto user)
+        {
+            var newUser = await service.Created(user);
+
+            return newUser == null ? Results.Conflict() :
+                newUser.Id.Length == 0 ? Results.UnprocessableEntity() : Results.Created("", newUser);
+        }
     }
 }
