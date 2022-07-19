@@ -28,6 +28,13 @@ namespace WhatsInt.Interface.Services
             return MapperHelper.Map<UserDto?>(userDb);
         }
 
+        internal async Task<UserDto?> FindUserByID(string id)
+        {
+            var user = await _userRepository.FindOne(x => x.Id == id);
+
+            return MapperHelper.Map<UserDto?>(user);
+        }
+
         public async Task<UserDto?> FindUserByEmail(string email)
         {
             var user = await _userRepository.FindOne(x => x.Email == email);
