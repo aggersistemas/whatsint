@@ -12,13 +12,21 @@ namespace WhatsInt.Interface.Features
             const string basePath = "/user";
 
             app.MapPost($"{basePath}/create", CreateUser).AllowAnonymous();
+            app.MapPut($"{basePath}/update", UpdateUser).AllowAnonymous();
         }
 
         private async Task<IResult> CreateUser(HttpContext context, UserService service, UserDto user)
         {
             var newUser = await service.Created(user);
+             
+            return Results.Created("User Created", newUser);
+        }
+        
+        private async Task<IResult> UpdateUser(HttpContext context, UserService service, UserDto loggedUser, UserDto user)
+        {
+            var newUser = await service.Update(loggedUser, user);
 
-            return Results.Created("", newUser);
+            return Results.Ok(newUser);
         }
     }
 }

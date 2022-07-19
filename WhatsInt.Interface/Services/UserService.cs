@@ -35,14 +35,25 @@ namespace WhatsInt.Interface.Services
             return MapperHelper.Map<UserDto?>(user);
         }
 
-        public async Task<User?> GetUser(UserDto user)
+        public async Task<UserDto?> Update(UserDto loggedUser, UserDto user)
+        {
+            if (await GetUser(loggedUser) == null) throw new AppException(System.Net.HttpStatusCode.Unauthorized, "Login Error");
+
+            var userUpdate = MapperHelper.Map<User>(user);
+
+            await _userRepository.Update(userUpdate);
+
+            return MapperHelper.Map<UserDto?>(userUpdate);
+        }
+
+        public async Task<UserDto?> GetUser(UserDto user)
         {
             var userFound = await _userRepository.FindOne(x => x.Email == user.Email);
 
             if (userFound != null)
                 return null;
 
-            return userFound?.Password == user.Password ? userFound : null;
+            return userFound?.Password == user.Password ? MapperHelper.Map<UserDto?>(userFound) : null;
         }
     }
 }
