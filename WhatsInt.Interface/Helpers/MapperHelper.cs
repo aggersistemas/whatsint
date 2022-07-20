@@ -30,7 +30,9 @@ namespace WhatsInt.Interface.Helpers
 
         public static object GetPropValue(this object src, string propName)
         {
-            return src.GetType().GetProperty(propName).GetValue(src, null);
+            var prop = src.GetType().GetProperty(propName);
+
+            return prop?.GetValue(src, null) ?? "";
         }
     }
 }

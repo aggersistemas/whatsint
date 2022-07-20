@@ -6,6 +6,7 @@ using System.Text;
 using WhatsInt.Infrastructure.Entities;
 using WhatsInt.Model;
 using WhatsInt.Interface.Helpers;
+using WhatsInt.Interface.Exceptions;
 
 namespace WhatsInt.Interface.Services
 {
@@ -20,10 +21,10 @@ namespace WhatsInt.Interface.Services
         }
         internal async Task<object?> Authorize()
         {
-            var authHeader = _context?.HttpContext?.Response.Headers.Authorization.ToString();
+            var authHeader = _context?.HttpContext?.Response.Headers.Authorization.ToString() ?? "";
 
             if (!authHeader.Contains("Basic"))
-                return null;
+                throw new AppException(System.Net.HttpStatusCode.Unauthorized);
 
             var basicToken = authHeader.Split(' ')[1].Split(':');
 
@@ -31,25 +32,23 @@ namespace WhatsInt.Interface.Services
 
             var passwordToken =  basicToken[1];
 
-            var user = new UserDto { Email = userToken, Password = passwordToken };
-
-            var dbUser = await Login(user);
+            var dbUser = await Login(userToken, passwordToken);
 
             return dbUser != null ? GenerateToken(dbUser)  : null;            
         }
 
-        public async Task<User?> Login(UserDto user)
+        public async Task<User?> Login(string email, string password)
         {
-            var userFound = await _userRepository.FindOne(x => x.Email == user.Email);
+            var userFound = await _userRepository.FindOne(x => x.Email == email);
 
-            return userFound?.Password == user.Password ? userFound : null;
+            return userFound?.Password == password ? userFound : null;
         }
 
         public TokenDto GenerateToken(User credentials)
         {
             var claimsIdentity = new Claim[]
             {
-                new(ClaimTypes.Name, credentials.Name),
+                new(ClaimTypes.Name, credentials.Id),
                 new(ClaimTypes.Role, "Admin")
             };
 
