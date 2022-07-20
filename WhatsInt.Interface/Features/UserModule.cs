@@ -18,7 +18,7 @@ namespace WhatsInt.Interface.Features
 
         private async Task<IResult> Find(HttpContext context, UserService service, string id)
         {
-            var user = await service.FindUserByID(id);
+            var user = await service.FindUserById(id);
 
             return Results.Ok(user);
         }

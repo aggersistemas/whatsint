@@ -28,23 +28,25 @@ namespace WhatsInt.Interface.Services
             return MapperHelper.Map<UserDto?>(userDb);
         }
 
-        internal async Task<UserDto?> FindUserByID(string id)
+        internal async Task<UserDto?> FindUserById(string id)
         {
-            var user = await _userRepository.FindOne(x => x.Id == id);
+            var userFound = await _userRepository.FindOne(x => x.Id == id);
 
-            return MapperHelper.Map<UserDto?>(user);
+            if (userFound != null) throw new AppException(System.Net.HttpStatusCode.NoContent, "User not found");
+
+            return MapperHelper.Map<UserDto?>(userFound);
         }
 
         public async Task<UserDto?> FindUserByEmail(string email)
         {
-            var user = await _userRepository.FindOne(x => x.Email == email);
+            var userFound = await _userRepository.FindOne(x => x.Email == email);
 
-            return MapperHelper.Map<UserDto?>(user);
+            return MapperHelper.Map<UserDto?>(userFound);
         }
 
         public async Task<UserDto?> Update(UserDto loggedUser, UserDto user)
         {
-            if (await GetUser(loggedUser) == null) throw new AppException(System.Net.HttpStatusCode.Unauthorized, "Login Error");
+            if (await GetUser(loggedUser) == null) throw new AppException(System.Net.HttpStatusCode.Unauthorized, "Login error");
 
             var userUpdate = MapperHelper.Map<User>(user);
 
@@ -55,7 +57,7 @@ namespace WhatsInt.Interface.Services
 
         public async Task<UserDto?> GetUser(UserDto user)
         {
-            var userFound = await _userRepository.FindOne(x => x.Email == user.Email);
+            var userFound = await FindUserByEmail(user.Email);
 
             if (userFound != null)
                 return null;
