@@ -32,7 +32,7 @@ namespace WhatsInt.Interface.Services
         {
             var userFound = await _userRepository.FindOne(x => x.Id == id);
 
-            if (userFound != null) throw new AppException(System.Net.HttpStatusCode.NoContent, "User not found");
+            if (userFound == null) throw new AppException(System.Net.HttpStatusCode.NoContent, "User not found");
 
             return MapperHelper.Map<UserDto?>(userFound);
         }
