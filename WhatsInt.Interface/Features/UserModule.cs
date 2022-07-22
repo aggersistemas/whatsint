@@ -30,9 +30,9 @@ namespace WhatsInt.Interface.Features
             return Results.Created("User Created", newUser);
         }
 
-        private async Task<IResult> UpdateUser(HttpContext context, UserService service, UserDto loggedUser, UserDto user)
+        private async Task<IResult> UpdateUser(HttpContext context, UserService service, UserDto user)
         {
-            var newUser = await service.Update(loggedUser, user);
+            var newUser = await service.Update(user);
 
             return Results.Ok(newUser);
         }

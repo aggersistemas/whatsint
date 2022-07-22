@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Repository;
+using System.Security.Claims;
 using WhatsInt.Infrastructure.Entities;
 using WhatsInt.Interface.Exceptions;
 using WhatsInt.Interface.Helpers;
@@ -9,10 +10,12 @@ namespace WhatsInt.Interface.Services
     public class UserService
     {
         private readonly IRepository<User> _userRepository;
+        private readonly IHttpContextAccessor _context;
 
-        public UserService(IRepository<User> userRepository)
+        public UserService(IRepository<User> userRepository, IHttpContextAccessor context)
         {
             _userRepository = userRepository;
+            _context = context;
         }
 
         public async Task<UserDto?> Created(UserDto user)
@@ -32,7 +35,8 @@ namespace WhatsInt.Interface.Services
         {
             var userFound = await _userRepository.FindOne(x => x.Id == id);
 
-            if (userFound == null) throw new AppException(System.Net.HttpStatusCode.NoContent, "User not found");
+            if (userFound == null) 
+                throw new AppException(System.Net.HttpStatusCode.NotFound, "User not found");
 
             return MapperHelper.Map<UserDto?>(userFound);
         }
@@ -44,25 +48,19 @@ namespace WhatsInt.Interface.Services
             return MapperHelper.Map<UserDto?>(userFound);
         }
 
-        public async Task<UserDto?> Update(UserDto loggedUser, UserDto user)
+        public async Task<UserDto?> Update(UserDto user)
         {
-            if (await GetUser(loggedUser) == null) throw new AppException(System.Net.HttpStatusCode.Unauthorized, "Login error");
+            var clientId = _context?.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.Name).Value ?? string.Empty;            
+
+            var findUser = await FindUserById(clientId);
+
+            if (findUser == null) throw new AppException(System.Net.HttpStatusCode.Unauthorized, "Login error");
 
             var userUpdate = MapperHelper.Map<User>(user);
 
             await _userRepository.Update(userUpdate);
 
             return MapperHelper.Map<UserDto?>(userUpdate);
-        }
-
-        public async Task<UserDto?> GetUser(UserDto user)
-        {
-            var userFound = await FindUserByEmail(user.Email);
-
-            if (userFound != null)
-                return null;
-
-            return userFound?.Password == user.Password ? MapperHelper.Map<UserDto?>(userFound) : null;
         }
     }
 }

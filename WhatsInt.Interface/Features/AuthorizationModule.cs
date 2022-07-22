@@ -13,11 +13,11 @@ namespace WhatsInt.Interface.Features
             app.MapPost($"{basePath}", Auth).AllowAnonymous();
         }
 
-        private async Task<IResult> Auth(HttpContext context, AuthorizationService service, UserDto user)
+        private async Task<IResult> Auth(HttpContext context, AuthorizationService service)
         {
             var bearer = await service.Authorize();
 
-            return bearer != null ? Results.Ok() : Results.Unauthorized();
+            return Results.Ok(bearer);
         }
     }
 }
