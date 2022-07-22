@@ -1,5 +1,6 @@
 ﻿using Carter;
 using WhatsInt.Interface.Services;
+using WhatsInt.Model;
 
 namespace WhatsInt.Interface.Features
 {
@@ -9,7 +10,7 @@ namespace WhatsInt.Interface.Features
         {
             const string basePath = "/question";
 
-            //app.MapPost($"{basePath}/create", CreateQuestion);
+            app.MapPost($"{basePath}/create", CreateQuestion);
             //app.MapPut($"{basePath}/update", UpdateQuestion);
             app.MapGet($"{basePath}/find", FindQuestion);
         }
@@ -21,7 +22,12 @@ namespace WhatsInt.Interface.Features
             return Results.Ok(question);
         }
 
-        
+        private async Task<IResult> CreateQuestion(HttpContext context, QuestionService service, QuestionDto question)
+        {
+            var newQuestion = await service.Created(question);
+
+            return Results.Created("Question Created", newQuestion);
+        }
 
     }
 }

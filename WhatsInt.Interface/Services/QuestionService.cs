@@ -18,6 +18,24 @@ namespace WhatsInt.Interface.Services
             _context = context; 
         }
 
+        public async Task<QuestionDto> Created(QuestionDto question)
+        {
+            if(question.Description == string.Empty)
+                throw new AppException(HttpStatusCode.NotAcceptable, "Question is empty");
+
+            var questionFound = await _questionRepository.FindOne(x => x.Order == question.Order);
+
+            if(questionFound != null)
+                throw new AppException(HttpStatusCode.Conflict, "Order already exists");
+
+            var questionDb = MapperHelper.Map<Question>(question);
+
+            await _questionRepository.Add(questionDb);
+
+            return MapperHelper.Map<QuestionDto>(questionDb);
+            
+        }
+
         internal async Task<QuestionDto?> FindQuestionById(string id)
         {
             var questionFound = await _questionRepository.FindOne(x => x.Id == id);
