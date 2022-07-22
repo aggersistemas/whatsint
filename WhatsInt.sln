@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt.Model", "Whatsint.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt.Infrastructure", "WhatsInt.Infrastructure\WhatsInt.Infrastructure.csproj", "{09CF2FCC-9A73-481C-A380-7F32A3126E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsInt", "WhatsInt\WhatsInt.csproj", "{D7EEF247-6BCA-46EC-98D6-03469E65513A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt", "WhatsInt\WhatsInt.csproj", "{D7EEF247-6BCA-46EC-98D6-03469E65513A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
