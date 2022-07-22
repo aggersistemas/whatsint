@@ -2,8 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    height: 100vh;
-    background: linear-gradient(#0A0A2A, #210B61);
+    background: #0A0A2A;
 }
 
 .logInForm {
