@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt.Model", "Whatsint.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt.Infrastructure", "WhatsInt.Infrastructure\WhatsInt.Infrastructure.csproj", "{09CF2FCC-9A73-481C-A380-7F32A3126E5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsInt", "WhatsInt\WhatsInt.csproj", "{0E35D12C-EAE4-4933-A58C-292ACA6450F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhatsInt", "WhatsInt\WhatsInt.csproj", "{D7EEF247-6BCA-46EC-98D6-03469E65513A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{09CF2FCC-9A73-481C-A380-7F32A3126E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09CF2FCC-9A73-481C-A380-7F32A3126E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09CF2FCC-9A73-481C-A380-7F32A3126E5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E35D12C-EAE4-4933-A58C-292ACA6450F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E35D12C-EAE4-4933-A58C-292ACA6450F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E35D12C-EAE4-4933-A58C-292ACA6450F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E35D12C-EAE4-4933-A58C-292ACA6450F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7EEF247-6BCA-46EC-98D6-03469E65513A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7EEF247-6BCA-46EC-98D6-03469E65513A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7EEF247-6BCA-46EC-98D6-03469E65513A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7EEF247-6BCA-46EC-98D6-03469E65513A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

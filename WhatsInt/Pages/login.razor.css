@@ -8,13 +8,12 @@
 
 .background {
     width: 430px;
-    height: c
     left: 50%;
     top: 40%;
 }
 
 .Titulo {
-    color:black;
+    color: black;
 }
 
 form {
@@ -23,24 +22,24 @@ form {
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
-    padding-top:10px;
+    padding-top: 10px;
 }
 
-    form * {
-        font-family: 'Poppins',sans-serif;
-        color: #ffffff;
-        letter-spacing: 0.5px;
-        outline: none;
-        border: none;
-    }
+form * {
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
 
-    form h3 {
-        margin-top:15px;
-        font-size: 60px;
-        font-weight: 500;
-        line-height: 35px;
-        text-align: center;
-    }
+form h3 {
+    margin-top: 15px;
+    font-size: 60px;
+    font-weight: 500;
+    line-height: 35px;
+    text-align: center;
+}
 
 label {
     display: block;
@@ -89,10 +88,10 @@ button {
     text-align: center;
 }
 
-.LogoLogin{
-    width:70px;
-    height:70px;
-    margin-top:-10px;
+.LogoLogin {
+    width: 70px;
+    height: 70px;
+    margin-top: -10px;
 }
 
 .LoginLabel {

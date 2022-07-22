@@ -1,6 +1,6 @@
-﻿namespace WhatsInt.Views
+﻿namespace WhatsInt.Pages
 {
-    public partial class LoginView
+    public partial class Login
     {
         private string userMail;
         private string userName;
@@ -16,6 +16,8 @@
 
         public void LoginButtonClick()
         {
+
+            Nav.NavigateTo("/user", true);
 
         }
 
