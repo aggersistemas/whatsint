@@ -37,6 +37,8 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
 
             serviceCollection.AddSingleton<UserService>();
 
+            serviceCollection.AddSingleton<QuestionService>();
+
             serviceCollection.AddSingleton<AuthorizationService>();
 
             serviceCollection.AddSingleton<IDatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
