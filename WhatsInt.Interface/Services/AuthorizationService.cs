@@ -21,20 +21,22 @@ namespace WhatsInt.Interface.Services
         }
         internal async Task<object?> Authorize()
         {
-            var authHeader = _context?.HttpContext?.Response.Headers.Authorization.ToString() ?? "";
+            var authHeader = _context.HttpContext?.Request.Headers.Authorization.ToString() ?? string.Empty;
 
-            if (!authHeader.Contains("Basic"))
+            const string basic = "Basic";
+
+            if (!authHeader.Contains(basic))
                 throw new AppException(System.Net.HttpStatusCode.Unauthorized);
 
-            var basicToken = authHeader.Split(' ')[1].Split(':');
+            var basicToken = authHeader.Replace(basic, string.Empty).Trim().Base64Decode().Split(':');
 
-            var userToken =  basicToken[0];
+            var userToken = basicToken[0];
 
-            var passwordToken =  basicToken[1];
+            var passwordToken = basicToken[1];
 
             var dbUser = await Login(userToken, passwordToken);
 
-            return dbUser != null ? GenerateToken(dbUser)  : null;            
+            return dbUser != null ? GenerateToken(dbUser) : null;
         }
 
         public async Task<User?> Login(string email, string password)
