@@ -1,43 +1,47 @@
-﻿namespace WhatsInt.Pages
+﻿using WhatsInt.Model;
+
+namespace WhatsInt.Pages
 {
     public partial class Login
     {
+        #region Criação de Variaveis
+
         private string userMail;
         private string userName;
         private string password;
         private string passwordConfirmation;
 
-        private string _labelCadasterText;
-        public string LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
+        #endregion
 
-        private bool onLogin;
-
-        private string labelButtonLogin = "Log In";
-
-        public void LoginButtonClick()
+        private void LoginButtonClick()
         {
+
+            var isValid = ValidateFields();
+
+            if (true)
+            {
+
+            }
+            else
+            {
+
+            }
 
             Nav.NavigateTo("/user", true);
-
         }
 
-        public void CadasterLabelClick()
+        private bool ValidateFields()
         {
-            onLogin = !onLogin;
-            switch (LabelCadasterText)
-            {
-                case "Ainda não possui cadastro? Cadastre-se Aqui":
-                    LabelCadasterText = "Ja possui cadastro? Clique aqui para logar";
-                    labelButtonLogin = "Cadastrar";
-                    _labelCadasterText = LabelCadasterText;
-                    return;
+            UserDto user = new();
 
-                case "Ja possui cadastro? Clique aqui para logar":
-                    LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
-                    labelButtonLogin = "Log In";
-                    _labelCadasterText = LabelCadasterText;
-                    return;
-            }
+            user.Email = userMail;
+            user.Name = userName;
+            user.Password = password;
+            user.PasswordConfirmation = passwordConfirmation;
+
+
+
+            return true;
         }
     }
 }
