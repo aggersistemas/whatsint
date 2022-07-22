@@ -2,6 +2,56 @@
 
 <h3>user</h3>
 
+<form>
+    <div class="CadastraPerguntas">
+        <div>
+            <input placeholder="Cadastre sua pergunta." />
+        </div>
+
+        <div>
+            <input placeholder="Cadastre sua resposta." />
+            <input placeholder="Cadastre sua resposta." />
+            <input placeholder="Cadastre sua resposta." />
+        </div>
+    </div>
+
+    <div class="ConsultaPerguntas">
+
+        <label>Perguntas Cadastradas</label>
+
+        <div>
+            <select>
+                <option>Perguntas Cadastradas</option>
+            </select>
+        </div>
+        <div class="RetornaSelecionadaDoBanco">
+            <div class="SelectePergunta">
+                <label>Pegunta</label>
+            </div>
+
+            <div class="SelecteRespostas">
+                <label>Respostas1</label>
+                <label>Respostas2</label>
+                <label>Respostas3</label>
+
+                <div>
+                    <button>Excluir</button>
+                </div>
+            </div>
+        </div>
+
+        <button>Salvar</button>
+    </div>
+</form>
+
+<footer id="footer" class="d-flex justify-content-center">
+    <div href="https://agger.com.br/">
+        <a href="https://agger.com.br/">
+            <img src="css/Images/LogoAgger.jpg" alt="Logo da empresa Agger">
+        </a>
+    </div>
+</footer>
+
 @code {
     string teste = "";
 }
