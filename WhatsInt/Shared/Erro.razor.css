@@ -26,12 +26,10 @@ html, body {
     text-shadow: 0px 0px $glowSize;
     font-size: 6rem;
     flex-direction: column;
-    .txt
-
-{
-    font-size: 1.8rem;
 }
 
+.txt {
+    font-size: 1.8rem;
 }
 
 @keyframes blink {

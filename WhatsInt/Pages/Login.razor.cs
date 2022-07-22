@@ -18,7 +18,7 @@ namespace WhatsInt.Pages
 
             var isValid = ValidateFields();
 
-            if ()
+            if (true)
             {
 
             }
