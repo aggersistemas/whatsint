@@ -11,31 +11,33 @@
         </div>
 
         <div id="userMailDiv">
-            <label for="usermail" class="Descricao">E-mail do Usuario</label>
+            <label class="Descricao">E-mail do Usuario</label>
             <input type="text" placeholder="E-mail" id="userMail" @bind-value="userMail">
         </div>
 
         @if (onLogin)
         {
             <div id="userNameDiv">
-                <label for="username" class="Descricao">Nome do Usuario</label>
+                <label class="Descricao">Nome do Usuario</label>
                 <input type="text" placeholder="Nome" id="userName" @bind-value="userName">
             </div>
         }
+
         <div id="passwordDiv">
-            <label for="password" class="Descricao">Senha</label>
+            <label class="Descricao">Senha</label>
             <input type="password" placeholder="Senha" id="password" @bind-value="password">
         </div>
 
         @if (onLogin)
         {
             <div id="passwordConfirmationDiv">
-                <label for="passwordConfirmation" class="Descricao">Confirmação de Senha</label>
+                <label class="Descricao">Confirmação de Senha</label>
                 <input type="password" placeholder="Confirme sua Senha" id="passwordConfirmation" @bind-value="passwordConfirmation">
             </div>
         }
+
         <div id="buttonLogIn">
-            <button @onclick="LoginButtonClick" >@labelButtonLogin</button>
+            <button @onclick="LoginButtonClick">@labelButtonLogin</button>
         </div>
 
         <div id="LabelCadasterText">
@@ -52,3 +54,34 @@
         </a>
     </div>
 </footer>
+
+
+
+@code
+{
+    private string LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
+
+    private bool onLogin;
+
+    private string labelButtonLogin = "Log In";
+
+    private void CadasterLabelClick()
+    {
+        onLogin = !onLogin;
+        switch (LabelCadasterText)
+        {
+            case "Ainda não possui cadastro? Cadastre-se Aqui":
+                LabelCadasterText = "Ja possui cadastro? Clique aqui para logar";
+                labelButtonLogin = "Cadastrar";
+
+                return;
+
+            case "Ja possui cadastro? Clique aqui para logar":
+                LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
+                labelButtonLogin = "Log In";
+
+                return;
+        }
+    }
+
+}
