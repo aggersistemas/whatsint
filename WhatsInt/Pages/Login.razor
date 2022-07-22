@@ -1,6 +1,5 @@
-﻿@inherits LayoutComponentBase;
-@page "/";
-@inject NavigationManager Nav;
+﻿@page "/";
+@inherits CustomBaseComponent<LoginViewModel>
 
 <div class="d-flex justify-content-center mt-1">
     <form id="logInForm" class="">
@@ -12,32 +11,32 @@
 
         <div id="userMailDiv">
             <label class="Descricao">E-mail do Usuario</label>
-            <input type="text" placeholder="E-mail" id="userMail" @bind-value="userMail">
+            <input type="text" placeholder="E-mail" id="userMail" @bind-value="BindingContext.UserMail">
         </div>
 
         @if (onLogin)
         {
             <div id="userNameDiv">
                 <label class="Descricao">Nome do Usuario</label>
-                <input type="text" placeholder="Nome" id="userName" @bind-value="userName">
+                <input type="text" placeholder="Nome" id="userName" @bind-value="BindingContext.UserName">
             </div>
         }
 
         <div id="passwordDiv">
             <label class="Descricao">Senha</label>
-            <input type="password" placeholder="Senha" id="password" @bind-value="password">
+            <input type="password" placeholder="Senha" id="password" @bind-value="BindingContext.Password">
         </div>
 
         @if (onLogin)
         {
             <div id="passwordConfirmationDiv">
                 <label class="Descricao">Confirmação de Senha</label>
-                <input type="password" placeholder="Confirme sua Senha" id="passwordConfirmation" @bind-value="passwordConfirmation">
+                <input type="password" placeholder="Confirme sua Senha" id="passwordConfirmation" @bind-value="BindingContext.PasswordConfirmation">
             </div>
         }
 
         <div id="buttonLogIn">
-            <button @onclick="LoginButtonClick">@labelButtonLogin</button>
+            <button @onclick="@BindingContext.LoginButtonClick">@labelButtonLogin</button>
         </div>
 
         <div id="LabelCadasterText">

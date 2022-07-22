@@ -1,15 +1,11 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using WhatsInt.Data;
+using WhatsInt.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
-
-var app = builder.Build();
+var app = builder.AddServices();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
