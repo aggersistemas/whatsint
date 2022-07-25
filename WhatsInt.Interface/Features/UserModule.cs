@@ -1,17 +1,20 @@
 ﻿using Carter;
-using WhatsInt.Infrastructure.Entities;
 using WhatsInt.Model;
 using WhatsInt.Interface.Services;
+using Microsoft.AspNetCore.Mvc;
+using Carter.ModelBinding;
 
 namespace WhatsInt.Interface.Features
 {
-    public class UserModule : ICarterModule
+    public class UserModule : Controller, ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
             const string basePath = "/user";
 
-            app.MapPost($"{basePath}/create", CreateUser).AllowAnonymous();
+            app.MapPost($"{basePath}/create", CreateUser).AllowAnonymous()
+                /*.Produces<UserDto>(StatusCodes.Status201Created)*/.ProducesValidationProblem();
+            
             app.MapPut($"{basePath}/update", UpdateUser).AllowAnonymous();
             app.MapGet($"{basePath}/find", Find).AllowAnonymous();
         }
@@ -22,9 +25,13 @@ namespace WhatsInt.Interface.Features
 
             return Results.Ok(user);
         }
-
-        private async Task<IResult> CreateUser(HttpContext context, UserService service, UserDto user)
+        private async Task<IResult> CreateUser(HttpRequest req, HttpContext context, UserService service, UserDto user)
         {
+            var result = req.Validate(user);
+
+            if(!result.IsValid)
+                return Results.ValidationProblem(result.GetValidationProblems());
+
             var newUser = await service.Created(user);
 
             return Results.Created("User Created", newUser);
