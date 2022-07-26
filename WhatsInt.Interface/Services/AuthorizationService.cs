@@ -4,9 +4,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using WhatsInt.Infrastructure.Entities;
+using WhatsInt.Infrastructure.Exceptions;
 using WhatsInt.Model;
 using WhatsInt.Interface.Helpers;
-using WhatsInt.Interface.Exceptions;
 
 namespace WhatsInt.Interface.Services
 {

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace WhatsInt.Interface.Exceptions
+namespace WhatsInt.Infrastructure.Exceptions
 {
     public class AppException : Exception
     {

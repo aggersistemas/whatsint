@@ -1,7 +1,8 @@
-﻿using Infrastructure.Repository;
+﻿using System.Net;
+using Infrastructure.Repository;
 using System.Security.Claims;
 using WhatsInt.Infrastructure.Entities;
-using WhatsInt.Interface.Exceptions;
+using WhatsInt.Infrastructure.Exceptions;
 using WhatsInt.Interface.Helpers;
 using WhatsInt.Model;
 
@@ -22,23 +23,30 @@ namespace WhatsInt.Interface.Services
         {
             var userFound = await FindUserByEmail(user.Email);
 
-            if (userFound != null) throw new AppException(System.Net.HttpStatusCode.Conflict, "User already created");
+            if (userFound != null) throw new AppException(HttpStatusCode.Conflict, "User already created");
 
-            var userDb = MapperHelper.Map<User>(user);
+            var userDomain = User.Create(user.Name, user.Email, user.Password);
 
-            await _userRepository.Add(userDb);
+            await _userRepository.Add(userDomain);
 
-            return MapperHelper.Map<UserDto?>(userDb);
+            return MapperHelper.Map<UserDto?>(userDomain);
         }
 
         internal async Task<UserDto?> FindUserById(string id)
         {
-            var userFound = await _userRepository.FindOne(x => x.Id == id);
-
-            if (userFound == null) 
-                throw new AppException(System.Net.HttpStatusCode.NotFound, "User not found");
+            var userFound = await FindUser(id);
 
             return MapperHelper.Map<UserDto?>(userFound);
+        }
+
+        private async Task<User?> FindUser(string id)
+        {
+            var userFound = await _userRepository.FindOne(x => x.Id == id);
+
+            if (userFound == null)
+                throw new AppException(HttpStatusCode.NotFound, "User not found");
+
+            return userFound;
         }
 
         public async Task<UserDto?> FindUserByEmail(string email)
@@ -50,11 +58,9 @@ namespace WhatsInt.Interface.Services
 
         public async Task<UserDto?> Update(UserDto user)
         {
-            var clientId = _context?.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.Name).Value ?? string.Empty;            
+            var clientId = _context?.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.Name).Value ?? string.Empty;
 
-            var findUser = await FindUserById(clientId);
-
-            if (findUser == null) throw new AppException(System.Net.HttpStatusCode.Unauthorized, "Login error");
+            var userDomain = await FindUser(user.Id);
 
             var userUpdate = MapperHelper.Map<User>(user);
 

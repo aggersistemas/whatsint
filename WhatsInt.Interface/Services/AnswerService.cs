@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Repository;
 using WhatsInt.Infrastructure.Entities.Generic;
-using WhatsInt.Interface.Exceptions;
+using WhatsInt.Infrastructure.Exceptions;
 using WhatsInt.Interface.Helpers;
 using WhatsInt.Model;
 
