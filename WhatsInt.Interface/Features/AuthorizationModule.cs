@@ -17,7 +17,7 @@ namespace WhatsInt.Interface.Features
         {
             var bearer = await service.Authorize();
 
-            return Results.Ok(bearer);
+            return bearer != null ? Results.Ok(bearer) : Results.Unauthorized();
         }
     }
 }
