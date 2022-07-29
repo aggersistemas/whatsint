@@ -10,4 +10,8 @@
     <PackageReference Include="MongoDB.Driver" Version="2.16.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WhatsInt.Common\WhatsInt.Common.csproj" />
+  </ItemGroup>
+
 </Project>

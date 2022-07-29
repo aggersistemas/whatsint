@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Infrastructure.Entities.Generic;
 using WhatsInt.Infrastructure.Exceptions;
+using WhatsInt.Common.Helpers;
 
 namespace WhatsInt.Infrastructure.Entities
 {
@@ -26,12 +27,14 @@ namespace WhatsInt.Infrastructure.Entities
 
             if (errorList.Count > 0) throw new AppException(HttpStatusCode.BadRequest, string.Join("\n", errorList));
 
+            var passwordEncrypted = userPassword.Base64Decode();
+
             return new User()
             {
                 Id = userId,
                 Name = userName,
                 Email = userEmail,
-                Password = userPassword
+                Password = passwordEncrypted
             };
         }
 
