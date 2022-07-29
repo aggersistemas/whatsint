@@ -45,11 +45,27 @@ namespace WhatsInt.ViewModel
             }
         }
 
-        private void UserLogin()
+        private async void UserLogin()
         {
-            throw new NotImplementedException();
+            #region Criação do Objeto UserDto
+
+            UserDto user = new();
+
+            user.Email = UserMail;
+
+            #endregion
+
+            using (var client = new HttpClient())
+            {
+                var teste = await GetApi(client, user);
+            }
         }
 
+        private async Task<object> GetApi(HttpClient client, UserDto user)
+        {
+            var response = client.GetFromJsonAsync($"https://localhost:7043/user/create/{user}", typeof(UserDto) );
+            return response;
+        }
 
         private async void UserCreate()
         {
@@ -65,7 +81,7 @@ namespace WhatsInt.ViewModel
 
             using (var client = new HttpClient())
             {
-                Navigate(await PostApi(client, user));
+                ViewAPIResponse(await PostApi(client, user));
             }
         }
 
@@ -75,7 +91,7 @@ namespace WhatsInt.ViewModel
             return response;
         }
 
-        private void Navigate(HttpResponseMessage response)
+        private void ViewAPIResponse(HttpResponseMessage response)
         {
             if (response.StatusCode == HttpStatusCode.Created)
                 Nav.NavigateTo("/interaction", true);
