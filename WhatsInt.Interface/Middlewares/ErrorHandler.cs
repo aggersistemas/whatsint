@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using WhatsInt.Interface.Exceptions;
+using WhatsInt.Infrastructure.Exceptions;
 
 namespace WhatsInt.Interface.Middlewares
 {

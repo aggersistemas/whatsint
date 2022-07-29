@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Carter" Version="6.0.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
     <PackageReference Include="MongoDB.Driver" Version="2.16.1" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.0" />
@@ -24,6 +23,10 @@
     <ProjectReference Include="..\WhatsInt.Infrastructure\WhatsInt.Infrastructure.csproj" />
     <ProjectReference Include="..\WhatsInt.Infrastructure\WhatsInt.Infrastructure.csproj" />
     <ProjectReference Include="..\WhatsInt.Model\WhatsInt.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 
 </Project>
