@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using MvvmBlazor.ViewModel;
 using WhatsInt.Model;
 
@@ -12,6 +15,9 @@ namespace WhatsInt.ViewModel
         public string UserName;
         public string Password;
         public string PasswordConfirmation;
+        public static string ErrorMessage;
+
+        public static bool onLogin;
         private NavigationManager Nav;
 
         #endregion
@@ -23,18 +29,32 @@ namespace WhatsInt.ViewModel
 
             if (isValid)
             {
+                if (onLogin)
+                {
+
+                }
+                else
+                {
+                    CreateUser();
+                }
 
             }
             else
             {
-
+                ShowErrorMessage();
             }
 
-            Nav.NavigateTo("/user", true);
+            //Nav.NavigateTo("/user", true);
         }
 
-        private async Task<bool> ValidateFields()
+        private void ShowErrorMessage()
         {
+
+        }
+
+        private void CreateUser()
+        {
+            /*
             UserDto user = new();
 
             user.Email = UserMail;
@@ -48,7 +68,35 @@ namespace WhatsInt.ViewModel
 
 
             }
+             */
 
+            return;
+        }
+
+        private async Task<bool> ValidateFields()
+        {
+#if DEBUG
+            return true;
+#endif
+
+            #region Validação Senha
+
+            if (Password != PasswordConfirmation)
+            {
+                ErrorMessage = "AS SENHAS NÃO COINCIDEM";
+                return false;
+            }
+
+
+            if (Password.Length < 6)
+            {
+                ErrorMessage = "A SENHA DEVE CONTER PELO MENOS 6 CARACTERES";
+                return false;
+            }
+
+            #endregion
+
+            ErrorMessage = "";
             return true;
         }
     }
