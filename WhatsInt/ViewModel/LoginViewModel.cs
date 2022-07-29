@@ -1,9 +1,11 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Net;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using MvvmBlazor.ViewModel;
 using WhatsInt.Model;
+using WhatsInt.Pages;
 
 namespace WhatsInt.ViewModel
 {
@@ -17,68 +19,76 @@ namespace WhatsInt.ViewModel
         public string PasswordConfirmation;
         public static string ErrorMessage;
 
-        public static bool onLogin;
+        public static string LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
+        public static string labelButtonLogin = "Log In";
+        public static bool onCadaster;
         private NavigationManager Nav;
 
         #endregion
 
-        public async void LoginButtonClick()
+        public void LoginButtonClick()
         {
-
-            var isValid = await ValidateFields();
-
-            if (isValid)
+            if (onCadaster)
             {
-                if (onLogin)
-                {
+                var isValid = ValidateFields();
 
-                }
-                else
-                {
-                    CreateUser();
-                }
+                if (!isValid)
+                    return;
 
+                UserCreate();
             }
             else
             {
-                ShowErrorMessage();
+                ErrorMessage = "";
+
+                UserLogin();
             }
-
-            //Nav.NavigateTo("/user", true);
         }
 
-        private void ShowErrorMessage()
+        private void UserLogin()
         {
-
+            throw new NotImplementedException();
         }
 
-        private void CreateUser()
+
+        private async void UserCreate()
         {
-            /*
+            #region Criação do Objeto UserDto
+
             UserDto user = new();
 
             user.Email = UserMail;
             user.Name = UserName;
             user.Password = Password;
-            user.PasswordConfirmation = PasswordConfirmation;
+
+            #endregion
 
             using (var client = new HttpClient())
             {
-                var response = await client.PostAsJsonAsync("https://localhost:7043/user/create", user);
-
-
+                Navigate(await PostApi(client, user));
             }
-             */
-
-            return;
         }
 
-        private async Task<bool> ValidateFields()
+        private static async Task<HttpResponseMessage> PostApi(HttpClient client, UserDto user)
         {
-#if DEBUG
-            return true;
-#endif
+            var response = await client.PostAsJsonAsync("https://localhost:7043/user/create", user);
+            return response;
+        }
 
+        private void Navigate(HttpResponseMessage response)
+        {
+            if (response.StatusCode == HttpStatusCode.Created)
+                Nav.NavigateTo("/interaction", true);
+
+            else if (response.StatusCode == HttpStatusCode.Conflict)
+                ErrorMessage = "JA EXISTE UM USUARIO CADASTRADO COM ESSE E-MAIL";
+
+            else
+                ErrorMessage = "ERRO AO CRIAR USUARIO! TENTE NOVAMENTE MAIS TARDE";
+        }
+
+        private bool ValidateFields()
+        {
             #region Validação Senha
 
             if (Password != PasswordConfirmation)
