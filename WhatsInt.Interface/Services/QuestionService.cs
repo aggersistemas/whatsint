@@ -36,6 +36,21 @@ namespace WhatsInt.Interface.Services
             
         }
 
+        internal async Task<QuestionDto> Update(QuestionDto question)
+        {
+            var questionUpdate = await _questionRepository.FindOne(x => x.Id == question.Id);
+            
+            if (questionUpdate == null)
+                throw new AppException(HttpStatusCode.Conflict, "Question not found");
+
+            var questionDb = MapperHelper.Map<Question>(question);
+
+            await _questionRepository.Update(questionDb);
+
+            return MapperHelper.Map<QuestionDto?>(questionDb);
+
+        }
+
         internal async Task<QuestionDto?> FindQuestionById(string id)
         {
             var questionFound = await _questionRepository.FindOne(x => x.Id == id);

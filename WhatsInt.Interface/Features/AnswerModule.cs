@@ -11,8 +11,10 @@ namespace WhatsInt.Interface.Features
         {
             const string basepath = "/answer";
 
-            app.MapPost($"{basepath}/create", CreateAnswer);
-            app.MapPut($"{basepath}/update", UpdateAnswer);
+            app.MapPost(basepath, CreateAnswer);
+            app.MapPut(basepath, UpdateAnswer);
+            app.MapGet($"{basepath}/{{idAnswer}}", FindAnswer);
+
         }
 
         private async Task<IResult> CreateAnswer(HttpContext context, AnswerService service, AnswerDto answer)
@@ -27,6 +29,13 @@ namespace WhatsInt.Interface.Features
             var updateAnswer = await service.Update(answer);
 
             return Results.Ok(updateAnswer);
+        }
+
+        private async Task<IResult> FindAnswer(HttpContext context, AnswerService service, string idAnswer)
+        {
+            var findAnswer = await service.Find(idAnswer);
+
+            return Results.Ok();
         }
     }
 
