@@ -1,4 +1,5 @@
-﻿using WhatsInt.ViewModel;
+﻿using WhatsInt.Data;
+using WhatsInt.ViewModel;
 
 namespace WhatsInt.Extensions
 {
@@ -10,6 +11,7 @@ namespace WhatsInt.Extensions
             webBuilder.Services.AddMvvm();
             webBuilder.Services.AddServerSideBlazor();
 
+            webBuilder.Services.AddScoped<UserService>();
             webBuilder.Services.AddTransient<LoginViewModel>();
 
             return webBuilder.Build();
