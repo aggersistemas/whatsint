@@ -12,9 +12,9 @@ namespace WhatsInt.Interface.Features
         {
             const string basePath = "/user";
 
-            app.MapPost($"{basePath}/create", CreateUser).AllowAnonymous();
-            app.MapPut($"{basePath}/update", UpdateUser);
-            app.MapGet($"{basePath}/find", Find);
+            app.MapPost(basePath, CreateUser).AllowAnonymous();
+            app.MapPut(basePath, UpdateUser);
+            app.MapGet($"{basePath}/{{id}}", Find).AllowAnonymous();
         }
 
         private async Task<IResult> Find(HttpContext context, UserService service, string id)
