@@ -49,7 +49,7 @@ namespace WhatsInt.Interface.Services
             return userFound;
         }
 
-        public async Task<UserDto?> FindUserByEmail(string email)
+        public async Task<UserDto?> FindUserByEmail(string? email)
         {
             var userFound = await _userRepository.FindOne(x => x.Email == email);
 

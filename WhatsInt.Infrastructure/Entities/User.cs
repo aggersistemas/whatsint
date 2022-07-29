@@ -6,13 +6,13 @@ namespace WhatsInt.Infrastructure.Entities
 {
     public class User : Entity
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
-        public static User CreateOrUpdate(string userName, string userEmail, string userPassword, string userId = "")
+        public static User CreateOrUpdate(string? userName, string? userEmail, string? userPassword, string userId = "")
         {
             var errorList = new List<string>();
 

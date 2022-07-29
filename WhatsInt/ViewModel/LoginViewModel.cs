@@ -16,16 +16,16 @@ namespace WhatsInt.ViewModel
     {
         #region Criação de Variaveis
 
-        public string UserMail;
-        public string UserName;
-        public string Password;
-        public string PasswordConfirmation;
+        public string? UserMail;
+        public string? UserName;
+        public string? Password;
+        public string? PasswordConfirmation;
         public static string ErrorMessage;
-        private UserService _userService;
+        private readonly UserService _userService;
         public static string LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
         public static string labelButtonLogin = "Log In";
         public static bool onCadaster;
-        private NavigationManager Nav;
+        private NavigationManager? Nav;
 
         #endregion
         public LoginViewModel(UserService userService)
