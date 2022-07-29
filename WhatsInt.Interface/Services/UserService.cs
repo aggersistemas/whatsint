@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Infrastructure.Repository;
 using System.Security.Claims;
+using WhatsInt.Common.Helpers;
 using WhatsInt.Infrastructure.Entities;
 using WhatsInt.Infrastructure.Exceptions;
 using WhatsInt.Interface.Helpers;
@@ -27,7 +28,11 @@ namespace WhatsInt.Interface.Services
 
             var userDomain = User.CreateOrUpdate(user.Name, user.Email, user.Password);
 
+            userDomain.Password = user.Password.Encrypt();
+
             await _userRepository.Add(userDomain);
+
+            userDomain.Password = userDomain.Password.Decrypt().Base64Encode();
 
             return MapperHelper.Map<UserDto?>(userDomain);
         }
@@ -35,6 +40,8 @@ namespace WhatsInt.Interface.Services
         internal async Task<UserDto?> FindUserById(string id)
         {
             var userFound = await FindUser(id);
+
+            userFound.Password = userFound.Password.Decrypt().Base64Encode();
 
             return MapperHelper.Map<UserDto?>(userFound);
         }
@@ -49,7 +56,7 @@ namespace WhatsInt.Interface.Services
             return userFound;
         }
 
-        public async Task<UserDto?> FindUserByEmail(string email)
+        public async Task<UserDto?> FindUserByEmail(string? email)
         {
             var userFound = await _userRepository.FindOne(x => x.Email == email);
 
@@ -64,7 +71,11 @@ namespace WhatsInt.Interface.Services
 
             var userVerified = User.CreateOrUpdate(user.Name, user.Email, user.Password, userDomain?.Id);
 
+            userDomain.Password = user.Password.Encrypt();
+
             await _userRepository.Update(userVerified);
+
+            userVerified.Password = userVerified.Password.Decrypt().Base64Encode();
 
             return MapperHelper.Map<UserDto?>(userVerified);
         }

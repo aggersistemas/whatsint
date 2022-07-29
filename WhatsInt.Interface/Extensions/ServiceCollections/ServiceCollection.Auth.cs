@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WhatsInt.Common.Helpers;
 
 namespace WhatsInt.Interface.Extensions.ServiceCollections
 {
@@ -9,7 +10,6 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
     {
         public static WebApplicationBuilder AddAuthentication(this WebApplicationBuilder webApplicationBuilder)
         {
-            const string token = "AggerPassword";
 
             var authenticationBuilder = webApplicationBuilder.Services.AddAuthentication(options =>
             {
@@ -24,7 +24,7 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(token)), 
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(EncryptionHelper.Secret)), 
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };

@@ -1,4 +1,5 @@
 ﻿@page "/";
+@using WhatsInt.Data
 @inherits CustomBaseComponent<LoginViewModel>
 
 <div class="d-flex justify-content-center mt-1">
@@ -67,6 +68,7 @@
 {
     private void CadasterLabelClick()
     {
+
         LoginViewModel.onCadaster = !LoginViewModel.onCadaster;
 
         switch (LoginViewModel.LabelCadasterText)

@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Repository;
+using System.Net;
 using WhatsInt.Infrastructure.Entities.Generic;
 using WhatsInt.Infrastructure.Exceptions;
 using WhatsInt.Interface.Helpers;
@@ -39,6 +40,16 @@ namespace WhatsInt.Interface.Services
             await _answerRepository.Update(answerUpdate);
 
             return MapperHelper.Map<AnswerDto>(answer);
+        }
+
+        internal async Task<AnswerDto> Find(string idAnswer)
+        {
+            var answerFound = await _answerRepository.FindOne(x => x.Id == idAnswer);
+
+            if(answerFound == null)
+                throw new AppException(HttpStatusCode.NotFound, "Answer not found");
+
+            return MapperHelper.Map<AnswerDto>(answerFound);
         }
     }
 }
