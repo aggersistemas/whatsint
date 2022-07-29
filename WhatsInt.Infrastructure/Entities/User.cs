@@ -12,7 +12,7 @@ namespace WhatsInt.Infrastructure.Entities
 
         public string Password { get; set; }
 
-        public static User Create(string userName, string userEmail, string userPassword)
+        public static User CreateOrUpdate(string userName, string userEmail, string userPassword, string userId = "")
         {
             var errorList = new List<string>();
 
@@ -28,6 +28,7 @@ namespace WhatsInt.Infrastructure.Entities
 
             return new User()
             {
+                Id = userId,
                 Name = userName,
                 Email = userEmail,
                 Password = userPassword

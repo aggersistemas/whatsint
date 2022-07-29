@@ -25,7 +25,7 @@ namespace WhatsInt.Interface.Services
 
             if (userFound != null) throw new AppException(HttpStatusCode.Conflict, "User already created");
 
-            var userDomain = User.Create(user.Name, user.Email, user.Password);
+            var userDomain = User.CreateOrUpdate(user.Name, user.Email, user.Password);
 
             await _userRepository.Add(userDomain);
 
@@ -60,13 +60,13 @@ namespace WhatsInt.Interface.Services
         {
             var clientId = _context?.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.Name).Value ?? string.Empty;
 
-            var userDomain = await FindUser(user.Id);
+            var userDomain = await FindUser(clientId);
 
-            var userUpdate = MapperHelper.Map<User>(user);
+            var userVerified = User.CreateOrUpdate(user.Name, user.Email, user.Password, userDomain?.Id);
 
-            await _userRepository.Update(userUpdate);
+            await _userRepository.Update(userVerified);
 
-            return MapperHelper.Map<UserDto?>(userUpdate);
+            return MapperHelper.Map<UserDto?>(userVerified);
         }
     }
 }
