@@ -1,7 +1,7 @@
 ﻿using Infrastructure.Repository;
 using System.Net;
 using WhatsInt.Infrastructure.Entities;
-using WhatsInt.Interface.Exceptions;
+using WhatsInt.Infrastructure.Exceptions;
 using WhatsInt.Interface.Helpers;
 using WhatsInt.Model;
 
