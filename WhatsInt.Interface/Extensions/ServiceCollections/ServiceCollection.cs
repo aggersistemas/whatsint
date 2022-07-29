@@ -37,7 +37,7 @@ namespace WhatsInt.Interface.Extensions.ServiceCollections
 
             serviceCollection.AddSingleton<UserService>();
 
-            serviceCollection.AddSingleton<AnswerService>();
+            serviceCollection.AddSingleton<QuestionService>();
 
             serviceCollection.AddSingleton<AuthorizationService>();
 

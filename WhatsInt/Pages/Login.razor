@@ -14,7 +14,7 @@
             <input type="text" placeholder="E-mail" id="userMail" @bind-value="BindingContext.UserMail">
         </div>
 
-        @if (onLogin)
+        @if (LoginViewModel.onCadaster)
         {
             <div id="userNameDiv">
                 <label class="Descricao">Nome do Usuario</label>
@@ -27,7 +27,7 @@
             <input type="password" placeholder="Senha" id="password" @bind-value="BindingContext.Password">
         </div>
 
-        @if (onLogin)
+        @if (LoginViewModel.onCadaster)
         {
             <div id="passwordConfirmationDiv">
                 <label class="Descricao">Confirmação de Senha</label>
@@ -36,13 +36,20 @@
         }
 
         <div id="buttonLogIn">
-            <button @onclick="@BindingContext.LoginButtonClick">@labelButtonLogin</button>
+            <button @onclick="@BindingContext.LoginButtonClick">@LoginViewModel.labelButtonLogin</button>
         </div>
 
         <div id="LabelCadasterText">
-            <label @onclick="CadasterLabelClick" for="LabelCadasterText">@LabelCadasterText</label>
+            <label @onclick="CadasterLabelClick" for="LabelCadasterText">@LoginViewModel.LabelCadasterText</label>
         </div>
 
+        @if (@LoginViewModel.ErrorMessage != "")
+        {
+            <tooltip>
+                <label>@LoginViewModel.ErrorMessage</label>
+            </tooltip>
+        }
+        
     </form>
 </div>
 
@@ -58,26 +65,21 @@
 
 @code
 {
-    private string LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
-
-    private bool onLogin;
-
-    private string labelButtonLogin = "Log In";
-
     private void CadasterLabelClick()
     {
-        onLogin = !onLogin;
-        switch (LabelCadasterText)
+        LoginViewModel.onCadaster = !LoginViewModel.onCadaster;
+
+        switch (LoginViewModel.LabelCadasterText)
         {
             case "Ainda não possui cadastro? Cadastre-se Aqui":
-                LabelCadasterText = "Ja possui cadastro? Clique aqui para logar";
-                labelButtonLogin = "Cadastrar";
+                LoginViewModel.LabelCadasterText = "Ja possui cadastro? Clique aqui para logar";
+                LoginViewModel.labelButtonLogin = "Cadastrar";
 
                 return;
 
             case "Ja possui cadastro? Clique aqui para logar":
-                LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
-                labelButtonLogin = "Log In";
+                LoginViewModel.LabelCadasterText = "Ainda não possui cadastro? Cadastre-se Aqui";
+                LoginViewModel.labelButtonLogin = "Log In";
 
                 return;
         }
