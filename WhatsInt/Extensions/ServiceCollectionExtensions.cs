@@ -11,6 +11,7 @@ namespace WhatsInt.Extensions
             webBuilder.Services.AddServerSideBlazor();
 
             webBuilder.Services.AddTransient<LoginViewModel>();
+            webBuilder.Services.AddTransient<InteractionViewModel>();
 
             return webBuilder.Build();
         }
