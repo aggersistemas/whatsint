@@ -28,7 +28,7 @@ namespace WhatsInt.Interface.Services
 
             var userDomain = User.CreateOrUpdate(user.Name, user.Email, user.Password);
 
-            userDomain.Password = user.Password.Encrypt();
+            userDomain.Password = user.Password?.Encrypt();
 
             await _userRepository.Add(userDomain);
 
@@ -69,9 +69,9 @@ namespace WhatsInt.Interface.Services
 
             var userDomain = await FindUser(clientId);
 
-            var userVerified = User.CreateOrUpdate(user.Name, user.Email, user.Password, userDomain?.Id);
+            var userVerified = User.CreateOrUpdate(user.Name, user.Email, user.Password, userDomain.Id);
 
-            userDomain.Password = user.Password.Encrypt();
+            userDomain.Password = user.Password?.Encrypt();
 
             await _userRepository.Update(userVerified);
 
