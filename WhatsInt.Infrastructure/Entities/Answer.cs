@@ -14,25 +14,25 @@ namespace WhatsInt.Infrastructure.Entities.Generic
         public string IdQuestion { get; set; }
         public string IdNextQuestion { get; set; }
 
-        public Answer Created(string answer)
+        public static Answer Create(string answerDescription, string answerOrder)
         {
             List<string> errorList = new();
 
-            var invalidAnswer = string.IsNullOrEmpty(answer);
+            var invalidAnswer = string.IsNullOrEmpty(answerDescription);
 
-            if (invalidAnswer) errorList.Add("Answer empty. Try again");
+            if (invalidAnswer) errorList.Add("Invalid Description");
 
-            if (string.IsNullOrEmpty(IdQuestion))
-                errorList.Add("Question not found");
+            var invalidOrder = string.IsNullOrEmpty(answerOrder);
+
+            if (invalidOrder) errorList.Add("Invalid Order");
 
             if (errorList.Count > 0) throw new AppException(HttpStatusCode.BadRequest, string.Join("\n", errorList));
 
             return new()
             {
-                IdQuestion = IdQuestion,
-                IdNextQuestion = IdNextQuestion
+                Description = answerDescription,
+                Order = answerOrder
             };
         }
-
     }
 }

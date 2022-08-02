@@ -22,7 +22,7 @@ namespace WhatsInt.Interface.Services
 
         internal async Task<AnswerDto> Create(AnswerDto answer)
         {
-            var answerDb = MapperHelper.Map<Answer>(answer);
+            var answerDb = Answer.Create(answer.Description, answer.Order);
 
             await _answerRepository.Add(answerDb);
 
