@@ -14,7 +14,7 @@ namespace WhatsInt.Infrastructure.Entities.Generic
         public string IdQuestion { get; set; }
         public string IdNextQuestion { get; set; }
 
-        public static Answer Create(string answerDescription, string answerOrder)
+        public static Answer CreateOrUpdate(string answerDescription, string answerOrder, string answerId = "")
         {
             List<string> errorList = new();
 
@@ -30,6 +30,7 @@ namespace WhatsInt.Infrastructure.Entities.Generic
 
             return new()
             {
+                Id = answerId,
                 Description = answerDescription,
                 Order = answerOrder
             };

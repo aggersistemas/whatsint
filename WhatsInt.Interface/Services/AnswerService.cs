@@ -18,11 +18,9 @@ namespace WhatsInt.Interface.Services
             _context = context;
         }
 
-
-
         internal async Task<AnswerDto> Create(AnswerDto answer)
         {
-            var answerDb = Answer.Create(answer.Description, answer.Order);
+            var answerDb = Answer.CreateOrUpdate(answer.Description, answer.Order);
 
             await _answerRepository.Add(answerDb);
 
@@ -31,11 +29,9 @@ namespace WhatsInt.Interface.Services
 
         internal async Task<AnswerDto> Update(AnswerDto answer)
         {
-           var findAnswer = await _answerRepository.FindOne(x => x.Id == answer.Id);
+            await FindById(answer.Id);
 
-           if (findAnswer == null) throw new AppException(System.Net.HttpStatusCode.NotFound, "Answer not found");
-
-            var answerUpdate = MapperHelper.Map<Answer>(answer);
+            var answerUpdate = Answer.CreateOrUpdate(answer.Description, answer.Order, answer.Id);
 
             await _answerRepository.Update(answerUpdate);
 
@@ -44,12 +40,18 @@ namespace WhatsInt.Interface.Services
 
         internal async Task<AnswerDto> Find(string idAnswer)
         {
-            var answerFound = await _answerRepository.FindOne(x => x.Id == idAnswer);
-
-            if(answerFound == null)
-                throw new AppException(HttpStatusCode.NotFound, "Answer not found");
+            var answerFound = await FindById(idAnswer);
 
             return MapperHelper.Map<AnswerDto>(answerFound);
+        }
+
+        private async Task<Answer> FindById(string answerId)
+        {
+            var findAnswer = await _answerRepository.FindOne(x => x.Id == answerId);
+
+            if (findAnswer == null) throw new AppException(HttpStatusCode.NotFound, "Answer not found");
+
+            return findAnswer;
         }
     }
 }
