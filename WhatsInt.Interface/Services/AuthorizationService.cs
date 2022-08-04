@@ -46,7 +46,7 @@ namespace WhatsInt.Interface.Services
 
             if (userFound == null) throw new AppException(HttpStatusCode.Unauthorized, "User not exist");
             
-            if (userFound.Password != password) throw new AppException(HttpStatusCode.Unauthorized, "Invalid password");
+            if (userFound.Password!.Decrypt() != password) throw new AppException(HttpStatusCode.Unauthorized, "Invalid password");
 
             return userFound;
         }
