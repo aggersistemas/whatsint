@@ -35,7 +35,7 @@ namespace WhatsInt.Interface.Services
 
             await _answerRepository.Update(answerUpdate);
 
-            return MapperHelper.Map<AnswerDto>(answer);
+            return MapperHelper.Map<AnswerDto>(answerUpdate);
         }
 
         internal async Task<AnswerDto> Find(string idAnswer)
