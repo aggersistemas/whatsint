@@ -20,7 +20,7 @@ namespace WhatsInt.Interface.Services
             _context = context;
         }
 
-        public async Task<UserDto?> Created(UserDto user)
+        public async Task<UserDto> Created(UserDto user)
         {
             var userFound = await FindUserByEmail(user.Email);
 
@@ -34,19 +34,19 @@ namespace WhatsInt.Interface.Services
 
             userDomain.Password = userDomain.Password!.DecryptToBase64();
 
-            return MapperHelper.Map<UserDto?>(userDomain);
+            return MapperHelper.Map<UserDto>(userDomain);
         }
 
-        internal async Task<UserDto?> FindUserById(string id)
+        internal async Task<UserDto> FindUserById(string id)
         {
             var userFound = await FindUser(id);
 
             userFound!.Password = userFound.Password!.DecryptToBase64();
 
-            return MapperHelper.Map<UserDto?>(userFound);
+            return MapperHelper.Map<UserDto>(userFound);
         }
 
-        private async Task<User?> FindUser(string id)
+        private async Task<User> FindUser(string id)
         {
             var userFound = await _userRepository.FindOne(x => x.Id == id);
 
@@ -63,7 +63,7 @@ namespace WhatsInt.Interface.Services
             return MapperHelper.Map<UserDto?>(userFound);
         }
 
-        public async Task<UserDto?> Update(UserDto user)
+        public async Task<UserDto> Update(UserDto user)
         {
             var clientId = _context?.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.Name).Value ?? string.Empty;
 
@@ -77,7 +77,7 @@ namespace WhatsInt.Interface.Services
 
             userVerified.Password = userVerified.Password!.DecryptToBase64();
 
-            return MapperHelper.Map<UserDto?>(userVerified);
+            return MapperHelper.Map<UserDto>(userVerified);
         }
     }
 }
