@@ -32,7 +32,7 @@ namespace WhatsInt.Interface.Services
 
             await _userRepository.Add(userDomain);
 
-            userDomain.Password = userDomain.Password.Decrypt().Base64Encode();
+            userDomain.Password = userDomain.Password!.DecryptToBase64();
 
             return MapperHelper.Map<UserDto?>(userDomain);
         }
@@ -41,7 +41,7 @@ namespace WhatsInt.Interface.Services
         {
             var userFound = await FindUser(id);
 
-            userFound.Password = userFound.Password.Decrypt().Base64Encode();
+            userFound!.Password = userFound.Password!.DecryptToBase64();
 
             return MapperHelper.Map<UserDto?>(userFound);
         }
@@ -75,7 +75,7 @@ namespace WhatsInt.Interface.Services
 
             await _userRepository.Update(userVerified);
 
-            userVerified.Password = userVerified.Password.Decrypt().Base64Encode();
+            userVerified.Password = userVerified.Password!.DecryptToBase64();
 
             return MapperHelper.Map<UserDto?>(userVerified);
         }

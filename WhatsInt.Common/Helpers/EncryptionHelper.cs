@@ -31,6 +31,8 @@ namespace WhatsInt.Common.Helpers
             }
         }
 
+        public static string DecryptToBase64(this string password) => password.Decrypt().Base64Encode();
+        
         public static byte[] DecryptBytes(this byte[] plainTextBytes)
         {
             using var deriveBytes = new Rfc2898DeriveBytes(EncryptionKey, Salt, 1000);
