@@ -10,7 +10,14 @@
                 <button onclick="@createForm">Criar Pergunta</button>
                 @if (InteractionViewModel.IsFormVisible)
                 {
-                    <input type="text" placeholder="Cadastre sua pergunta." id="Quest" @bind-value="BindingContext.Quest" />
+                     <div id="buttonCreate">
+                       <input type="text" placeholder="Cadastre sua pergunta." id="Quest" @bind-value="BindingContext.Quest" />
+                    </div>
+
+                    <input id="Asks1" placeholder="Reposta 1" @bind-value="BindingContext.Asks1">
+                    <input id="Asks2" placeholder="Reposta 2" @bind-value="BindingContext.Asks2">
+                    <input id="Asks3" placeholder="Reposta 3" @bind-value="BindingContext.Asks3">
+
                     <div id="buttonSave">
                         <button @onclick="@BindingContext.saveQuestClick">Salvar</button>
                     </div>
@@ -25,18 +32,23 @@
 
         <div>
             <select>
-                <option>Perguntas Cadastradas</option>
+                @foreach( var aux in InteractionViewModel.listArray)
+                {
+                    <option>@aux</option>
+                }
             </select>
         </div>
+
         <div class="RetornaSelecionadaDoBanco">
             <div class="SelectePergunta">
                 <label>Pegunta</label>
+
             </div>
 
             <div class="SelecteRespostas">
-                <label>Respostas1</label>
-                <label>Respostas2</label>
-                <label>Respostas3</label>
+                <input id="Asks1" placeholder="Reposta 1" @bind-value="BindingContext.Asks1">
+                <input id="Asks2" placeholder="Reposta 2" @bind-value="BindingContext.Asks2">
+                <input id="Asks3" placeholder="Reposta 3" @bind-value="BindingContext.Asks3">
             </div>
         </div>
 
