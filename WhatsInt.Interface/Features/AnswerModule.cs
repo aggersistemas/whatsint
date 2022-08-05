@@ -35,7 +35,7 @@ namespace WhatsInt.Interface.Features
         {
             var findAnswer = await service.Find(idAnswer);
 
-            return Results.Ok();
+            return Results.Ok(findAnswer);
         }
     }
 

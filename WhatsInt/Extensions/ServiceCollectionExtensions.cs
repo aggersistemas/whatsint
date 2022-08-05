@@ -13,6 +13,7 @@ namespace WhatsInt.Extensions
 
             webBuilder.Services.AddScoped<UserService>();
             webBuilder.Services.AddTransient<LoginViewModel>();
+            webBuilder.Services.AddTransient<InteractionViewModel>();
 
             return webBuilder.Build();
         }

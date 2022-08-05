@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Repository;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using WhatsInt.Common.Helpers;
@@ -26,8 +27,7 @@ namespace WhatsInt.Interface.Services
 
             const string basic = "Basic";
 
-            if (!authHeader.Contains(basic))
-                throw new AppException(System.Net.HttpStatusCode.Unauthorized);
+            if (!authHeader.Contains(basic)) throw new AppException(HttpStatusCode.Unauthorized);
 
             var basicToken = authHeader.Replace(basic, string.Empty).Trim().Base64Decode().Split(':');
 
@@ -37,14 +37,18 @@ namespace WhatsInt.Interface.Services
 
             var dbUser = await Login(userToken, passwordToken);
 
-            return dbUser != null ? GenerateToken(dbUser) : null;
+            return GenerateToken(dbUser!);
         }
 
         public async Task<User?> Login(string email, string password)
         {
             var userFound = await _userRepository.FindOne(x => x.Email == email);
 
-            return userFound?.Password == password ? userFound : null;
+            if (userFound == null) throw new AppException(HttpStatusCode.Unauthorized, "User not exist");
+            
+            if (userFound.Password!.Decrypt() != password) throw new AppException(HttpStatusCode.Unauthorized, "Invalid password");
+
+            return userFound;
         }
 
         public TokenDto GenerateToken(User credentials)
@@ -70,7 +74,7 @@ namespace WhatsInt.Interface.Services
 
             var generatedToken = tokenHandler.WriteToken(securityToken);
 
-            return new TokenDto
+            return new()
             {
                 Expires = expiresHours.TotalSeconds,
                 Token = generatedToken,
