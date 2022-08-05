@@ -22,8 +22,6 @@ namespace WhatsInt.Interface.Services
         {
             var answerDb = await _answerRepository.FindOne(x => x.Order == answer.Order && x.IdQuestion == answer.IdQuestion);
 
-            var teste = _answerRepository.ToList();
-
             if (answerDb != null) throw new AppException(HttpStatusCode.Conflict, "This order already exists");
 
             answerDb = Answer.CreateOrUpdate(answer.Description, answer.Order, answer.IdQuestion);
