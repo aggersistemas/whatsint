@@ -14,7 +14,7 @@ namespace WhatsInt.Infrastructure.Entities.Generic
         public string IdQuestion { get; set; }
         public string IdNextQuestion { get; set; }
 
-        public static Answer CreateOrUpdate(string answerDescription, string answerOrder, string answerId = "")
+        public static Answer CreateOrUpdate(string answerDescription, int answerOrder,  string questionId, string? answerId = null)
         {
             List<string> errorList = new();
 
@@ -22,7 +22,7 @@ namespace WhatsInt.Infrastructure.Entities.Generic
 
             if (invalidAnswer) errorList.Add("Invalid Description");
 
-            var invalidOrder = string.IsNullOrEmpty(answerOrder);
+            var invalidOrder = answerOrder == 0;
 
             if (invalidOrder) errorList.Add("Invalid Order");
 
@@ -30,9 +30,10 @@ namespace WhatsInt.Infrastructure.Entities.Generic
 
             return new()
             {
-                Id = answerId,
+                Id = answerId ?? string.Empty,
                 Description = answerDescription,
-                Order = answerOrder
+                Order = answerOrder,
+                IdQuestion = questionId,
             };
         }
     }
