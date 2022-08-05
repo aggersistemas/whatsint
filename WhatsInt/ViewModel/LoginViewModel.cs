@@ -67,10 +67,12 @@ namespace WhatsInt.ViewModel
             var auth = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{user.Email}:{user.Password}"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue($"Basic", auth);
             var response = await client.PostAsJsonAsync<TokenDto>("https://localhost:7043/auth", null);
-            _userService.Token = await response.Content.ReadFromJsonAsync<TokenDto>();
-
+            
             if (response.IsSuccessStatusCode)
+            {
+                _userService.Token = await response.Content.ReadFromJsonAsync<TokenDto>();
                 Nav.NavigateTo("/interaction", true);
+            }
             else
                 ErrorMessage = "ERRO AO LOGAR! USUARIO OU SENHA INCORRETOS";
 
@@ -95,7 +97,7 @@ namespace WhatsInt.ViewModel
             #endregion
 
             using var client = new HttpClient();
-            ViewAPIResponse(await PostApi(client, user));
+            VerifySuccess(await PostApi(client, user));
         }
 
         private static async Task<HttpResponseMessage> PostApi(HttpClient client, UserDto user)
@@ -104,7 +106,7 @@ namespace WhatsInt.ViewModel
             return response;
         }
 
-        private void ViewAPIResponse(HttpResponseMessage response)
+        private void VerifySuccess(HttpResponseMessage response)
         {
             if (response.StatusCode == HttpStatusCode.Created)
                 Nav.NavigateTo("/interaction", true);
