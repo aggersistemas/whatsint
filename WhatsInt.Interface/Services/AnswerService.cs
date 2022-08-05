@@ -20,7 +20,13 @@ namespace WhatsInt.Interface.Services
 
         internal async Task<AnswerDto> Create(AnswerDto answer)
         {
-            var answerDb = Answer.CreateOrUpdate(answer.Description, answer.Order);
+            var answerDb = await _answerRepository.FindOne(x => x.Order == answer.Order && x.IdQuestion == answer.IdQuestion);
+
+            var teste = _answerRepository.ToList();
+
+            if (answerDb != null) throw new AppException(HttpStatusCode.Conflict, "This order already exists");
+
+            answerDb = Answer.CreateOrUpdate(answer.Description, answer.Order, answer.IdQuestion);
 
             await _answerRepository.Add(answerDb);
 
@@ -31,7 +37,7 @@ namespace WhatsInt.Interface.Services
         {
             await FindById(answer.Id);
 
-            var answerUpdate = Answer.CreateOrUpdate(answer.Description, answer.Order, answer.Id);
+            var answerUpdate = Answer.CreateOrUpdate(answer.Description, answer.Order, answer.IdQuestion, answer.Id);
 
             await _answerRepository.Update(answerUpdate);
 

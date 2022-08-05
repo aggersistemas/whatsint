@@ -11,7 +11,7 @@ namespace WhatsInt.Infrastructure.Entities.Generic
     {
         public string Description { get; set; }
 
-        public string Order { get; set; }
+        public int Order { get; set; }
 
     }
 }

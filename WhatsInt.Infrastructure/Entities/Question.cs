@@ -11,13 +11,13 @@ namespace WhatsInt.Infrastructure.Entities
 {
     public class Question : Interact
     {
-        public Question Create(string question)
+        public static Question Create(string question)
         {
             List<string> errorList = new();
 
             var invalidQuestion = string.IsNullOrEmpty(question);
 
-            if (invalidQuestion) errorList.Add("Question not found.");
+            if (invalidQuestion) errorList.Add("Invalid Question !");
 
             if (errorList.Count > 0) throw new AppException(HttpStatusCode.BadRequest, string.Join("\n", errorList));
 
@@ -27,5 +27,33 @@ namespace WhatsInt.Infrastructure.Entities
             };
 
         }
+
+        public static Question Update(string description, int order, string id)
+        {
+            List<string> errorList = new();
+
+            var invalidQuestion = string.IsNullOrEmpty(description);
+
+            if (invalidQuestion) errorList.Add("Invalid Question!");
+
+            var invalidOrder = order == 0;
+
+            if (invalidOrder) errorList.Add("Invalid Order!");
+
+            var invalidId = string.IsNullOrEmpty(id);
+
+            if (invalidId) errorList.Add("Invalid Id!");
+
+            if (errorList.Count > 0) throw new AppException(HttpStatusCode.BadRequest, string.Join("\n", errorList));
+
+            return new Question()
+            {
+                Description = description,
+                Order = order,
+                Id = id
+            };
+
+        }
+
     }
 }

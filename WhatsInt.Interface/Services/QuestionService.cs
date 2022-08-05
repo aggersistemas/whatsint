@@ -23,12 +23,16 @@ namespace WhatsInt.Interface.Services
             if(question.Description == string.Empty)
                 throw new AppException(HttpStatusCode.NotAcceptable, "Question is empty");
 
+            var teste = _questionRepository.ToList();
+
             var questionFound = await _questionRepository.FindOne(x => x.Order == question.Order);
 
             if(questionFound != null)
                 throw new AppException(HttpStatusCode.Conflict, "Order already exists");
 
-            var questionDb = MapperHelper.Map<Question>(question);
+            //var questionDb = MapperHelper.Map<Question>(question);
+
+            var questionDb = Question.Create(question.Description);
 
             await _questionRepository.Add(questionDb);
 
@@ -39,15 +43,17 @@ namespace WhatsInt.Interface.Services
         internal async Task<QuestionDto> Update(QuestionDto question)
         {
             var questionUpdate = await _questionRepository.FindOne(x => x.Id == question.Id);
-            
-            if (questionUpdate == null)
-                throw new AppException(HttpStatusCode.Conflict, "Question not found");
 
-            var questionDb = MapperHelper.Map<Question>(question);
+            var teste = _questionRepository.ToList();
+
+            if (questionUpdate == null)
+                throw new AppException(HttpStatusCode.NotFound, "Question not found");
+
+            var questionDb = Question.Update(question.Description, question.Order, question.Id);
 
             await _questionRepository.Update(questionDb);
 
-            return MapperHelper.Map<QuestionDto?>(questionDb);
+            return MapperHelper.Map<QuestionDto>(questionDb);
 
         }
 
