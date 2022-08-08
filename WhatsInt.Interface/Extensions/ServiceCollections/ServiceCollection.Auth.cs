@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using WhatsInt.Common.Helpers;
+using WhatsInt.Infrastructure.Helpers;
 
 namespace WhatsInt.Interface.Extensions.ServiceCollections
 {

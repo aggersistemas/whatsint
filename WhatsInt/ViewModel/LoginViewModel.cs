@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis;
 using MvvmBlazor.ViewModel;
 using WhatsInt.Data;
 using WhatsInt.Model;
+using WhatsInt.Model.Dto;
 using WhatsInt.Pages;
 
 namespace WhatsInt.ViewModel
@@ -102,7 +103,7 @@ namespace WhatsInt.ViewModel
 
         private static async Task<HttpResponseMessage> PostApi(HttpClient client, UserDto user)
         {
-            var response = await client.PostAsJsonAsync("https://localhost:7043/user/create", user);
+            var response = await client.PostAsJsonAsync("https://localhost:7043/user", user);
             return response;
         }
 

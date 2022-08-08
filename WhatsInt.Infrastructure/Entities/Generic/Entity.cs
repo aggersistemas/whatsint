@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Infrastructure.Entities.Generic
+namespace WhatsInt.Infrastructure.Entities.Generic
 {
     [DataContract]
     [Serializable]

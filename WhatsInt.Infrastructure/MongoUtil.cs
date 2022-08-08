@@ -1,6 +1,6 @@
-﻿using Infrastructure.Entities.Generic;
-using Infrastructure.Models;
+﻿using Infrastructure.Models;
 using MongoDB.Driver;
+using WhatsInt.Infrastructure.Entities.Generic;
 
 namespace Infrastructure
 {

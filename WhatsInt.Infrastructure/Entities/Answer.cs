@@ -1,18 +1,13 @@
-﻿using Infrastructure.Entities.Generic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
+using WhatsInt.Infrastructure.Entities.Generic;
 using WhatsInt.Infrastructure.Exceptions;
 
-namespace WhatsInt.Infrastructure.Entities.Generic
+namespace WhatsInt.Infrastructure.Entities
 {
     public class Answer : Interact
     {
-        public string IdQuestion { get; set; }
-        public string IdNextQuestion { get; set; }
+        public string? IdQuestion { get; set; }
+        public string? IdNextQuestion { get; set; }
 
         public static Answer CreateOrUpdate(string answerDescription, int answerOrder,  string questionId, string? answerId = null)
         {

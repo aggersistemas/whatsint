@@ -1,8 +1,6 @@
 ﻿using Carter;
-using WhatsInt.Model;
 using WhatsInt.Interface.Services;
-using Microsoft.AspNetCore.Mvc;
-using Carter.ModelBinding;
+using WhatsInt.Model.Dto;
 
 namespace WhatsInt.Interface.Features
 {
@@ -14,27 +12,28 @@ namespace WhatsInt.Interface.Features
 
             app.MapPost(basePath, CreateUser).AllowAnonymous();
             app.MapPut(basePath, UpdateUser);
-            app.MapGet($"{basePath}/{{id}}", Find).AllowAnonymous();
+            app.MapGet($"{basePath}/{{userId}}", Find).AllowAnonymous();
         }
 
-        private async Task<IResult> Find(HttpContext context, UserService service, string id)
+        private static async Task<IResult> Find(HttpContext context, UserService service, string userId)
         {
-            var user = await service.FindUserById(id);
+            var userDto = await service.FindUserById(userId);
 
-            return Results.Ok(user);
-        }
-        private async Task<IResult> CreateUser(HttpContext context, UserService service, UserDto user)
-        {
-            var newUser = await service.Created(user);
-
-            return Results.Created("User Created", newUser);
+            return Results.Ok(userDto);
         }
 
-        private async Task<IResult> UpdateUser(HttpContext context, UserService service, UserDto user)
+        private static async Task<IResult> CreateUser(HttpContext context, UserService userService, UserDto userDto)
         {
-            var newUser = await service.Update(user);
+            var userCreated = await userService.Create(userDto);
 
-            return Results.Ok(newUser);
+            return Results.Created(string.Empty, userCreated);
+        }
+
+        private static async Task<IResult> UpdateUser(HttpContext context, UserService userService, UserDto userDto)
+        {
+            var userUpdated = await userService.Update(userDto);
+
+            return Results.Ok(userUpdated);
         }
     }
 }

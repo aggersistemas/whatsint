@@ -4,50 +4,54 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using WhatsInt.Common.Helpers;
 using WhatsInt.Infrastructure.Entities;
 using WhatsInt.Infrastructure.Exceptions;
-using WhatsInt.Model;
-using WhatsInt.Interface.Helpers;
+using WhatsInt.Infrastructure.Helpers;
+using WhatsInt.Infrastructure.Resources;
+using WhatsInt.Model.Dto;
 
 namespace WhatsInt.Interface.Services
 {
     public class AuthorizationService
     {
         private readonly IRepository<User> _userRepository;
-        private readonly IHttpContextAccessor _context;
-        public AuthorizationService(IRepository<User> userRepository, IHttpContextAccessor context)
+        private readonly IHttpContextAccessor _httpContext;
+
+        public AuthorizationService(IRepository<User> userRepository, IHttpContextAccessor httpContext)
         {
             _userRepository = userRepository;
-            _context = context;
+            _httpContext = httpContext;
         }
+
         internal async Task<object?> Authorize()
         {
-            var authHeader = _context.HttpContext?.Request.Headers.Authorization.ToString() ?? string.Empty;
+            var authHeader = _httpContext.HttpContext?.Request.Headers.Authorization.ToString() ?? string.Empty;
 
-            const string basic = "Basic";
+            const string basicAuth = "Basic";
 
-            if (!authHeader.Contains(basic)) throw new AppException(HttpStatusCode.Unauthorized);
+            var withoutBasic = !authHeader.Contains(basicAuth);
 
-            var basicToken = authHeader.Replace(basic, string.Empty).Trim().Base64Decode().Split(':');
+            if (withoutBasic) throw new AppException(HttpStatusCode.Unauthorized);
+
+            var basicToken = authHeader.Replace(basicAuth, string.Empty).Trim().Base64Decode().Split(':');
 
             var userToken = basicToken[0];
 
             var passwordToken = basicToken[1];
 
-            var dbUser = await Login(userToken, passwordToken);
+            var userDomain = await Login(userToken, passwordToken);
 
-            return GenerateToken(dbUser!);
+            return GenerateToken(userDomain!);
         }
 
         public async Task<User?> Login(string email, string password)
         {
             var userFound = await _userRepository.FindOne(x => x.Email == email);
 
-            if (userFound == null) throw new AppException(HttpStatusCode.Unauthorized, "User not exist");
-            
-            if (userFound.Password!.Decrypt() != password) throw new AppException(HttpStatusCode.Unauthorized, "Invalid password");
+            var invalidUser = userFound == null || userFound.Password!.Decrypt() != password;
 
+            if (invalidUser) throw new AppException(HttpStatusCode.Unauthorized, Messages.InvalidUser);
+            
             return userFound;
         }
 
@@ -61,11 +65,13 @@ namespace WhatsInt.Interface.Services
 
             var expiresHours = TimeSpan.FromHours(2);
 
+            var byteKey = Encoding.ASCII.GetBytes(EncryptionHelper.Secret);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claimsIdentity),
                 Expires = DateTime.UtcNow.Add(expiresHours),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(EncryptionHelper.Secret)), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(byteKey), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -74,7 +80,7 @@ namespace WhatsInt.Interface.Services
 
             var generatedToken = tokenHandler.WriteToken(securityToken);
 
-            return new()
+            return new TokenDto
             {
                 Expires = expiresHours.TotalSeconds,
                 Token = generatedToken,

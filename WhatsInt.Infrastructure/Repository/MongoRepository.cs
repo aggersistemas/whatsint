@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
-using Infrastructure.Entities.Generic;
 using Infrastructure.Models;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using WhatsInt.Infrastructure.Entities.Generic;
 
 namespace Infrastructure.Repository
 {

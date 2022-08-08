@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 using WhatsInt.Infrastructure.Entities.Generic;
 using WhatsInt.Infrastructure.Exceptions;
 
@@ -25,7 +20,6 @@ namespace WhatsInt.Infrastructure.Entities
             {
                 Description = question
             };
-
         }
 
         public static Question Update(string description, int order, string id)

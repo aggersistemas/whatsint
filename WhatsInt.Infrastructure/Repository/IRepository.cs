@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
-using Infrastructure.Entities.Generic;
 using MongoDB.Driver;
+using WhatsInt.Infrastructure.Entities.Generic;
 
 namespace Infrastructure.Repository
 {

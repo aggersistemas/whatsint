@@ -1,7 +1,9 @@
 ﻿using System.Net;
-using Infrastructure.Entities.Generic;
+using System.Text.RegularExpressions;
+using WhatsInt.Infrastructure.Entities.Generic;
 using WhatsInt.Infrastructure.Exceptions;
-using WhatsInt.Common.Helpers;
+using WhatsInt.Infrastructure.Helpers;
+using WhatsInt.Infrastructure.Resources;
 
 namespace WhatsInt.Infrastructure.Entities
 {
@@ -15,26 +17,32 @@ namespace WhatsInt.Infrastructure.Entities
 
         public static User CreateOrUpdate(string? userName, string? userEmail, string? userPassword, string userId = "")
         {
-            var errorList = new List<string>();
+            var errorMessages = new List<string>();
 
-            var invalidName = string.IsNullOrEmpty(userName);
+            var invalidPassword = string.IsNullOrEmpty(userPassword) || userPassword.Length < 6;
 
-            if (invalidName) errorList.Add("Invalid user");
+            if (invalidPassword)  errorMessages.Add(Messages.PasswordValidation);
 
-            var invalidEmail = string.IsNullOrEmpty(userEmail) || !userEmail.Contains("@") || !userEmail.Contains(".");
+            var nameLength = userName?.Trim().Split(' ').Length;
 
-            if (invalidEmail) errorList.Add("Invalid Email");
+            if (nameLength is null or <= 1)  errorMessages.Add(Messages.NameValidation);
 
-            if (errorList.Count > 0) throw new AppException(HttpStatusCode.BadRequest, string.Join("\n", errorList));
+            var invalidEmail = userEmail == null || !Regex.IsMatch(userEmail, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,10})+)$");
 
-            var passwordEncrypted = userPassword.Base64Decode();
+            if (invalidEmail)  errorMessages.Add(Messages.EmailValidation);
 
-            return new User()
+            var messageInline = string.Join(Environment.NewLine, errorMessages);
+
+            if (errorMessages.Count > 0) throw new AppException(HttpStatusCode.BadRequest, messageInline);
+
+            var passwordToSave = userPassword?.Base64Decode().Encrypt();
+
+            return new User
             {
                 Id = userId,
                 Name = userName,
                 Email = userEmail,
-                Password = passwordEncrypted
+                Password = passwordToSave
             };
         }
 

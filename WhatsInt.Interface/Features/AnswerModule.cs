@@ -1,6 +1,6 @@
 ﻿using Carter;
 using WhatsInt.Interface.Services;
-using WhatsInt.Model;
+using WhatsInt.Model.Dto;
 
 
 namespace WhatsInt.Interface.Features

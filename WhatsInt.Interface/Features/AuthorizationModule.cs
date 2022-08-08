@@ -1,5 +1,4 @@
 ﻿using Carter;
-using WhatsInt.Model;
 using WhatsInt.Interface.Services;
 
 namespace WhatsInt.Interface.Features
@@ -13,11 +12,11 @@ namespace WhatsInt.Interface.Features
             app.MapPost($"{basePath}", Auth).AllowAnonymous();
         }
 
-        private async Task<IResult> Auth(HttpContext context, AuthorizationService service)
+        private static async Task<IResult> Auth(HttpContext context, AuthorizationService service)
         {
-            var bearer = await service.Authorize();
+            var generatedBearer = await service.Authorize();
 
-            return Results.Ok(bearer);
+            return Results.Ok(generatedBearer);
         }
     }
 }

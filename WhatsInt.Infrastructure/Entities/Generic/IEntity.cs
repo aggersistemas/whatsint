@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Infrastructure.Entities.Generic
+namespace WhatsInt.Infrastructure.Entities.Generic
 {
     public interface IEntity<TKey>
     {

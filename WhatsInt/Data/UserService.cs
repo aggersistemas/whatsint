@@ -1,4 +1,5 @@
 ﻿using WhatsInt.Model;
+using WhatsInt.Model.Dto;
 
 namespace WhatsInt.Data
 {

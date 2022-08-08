@@ -20,8 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WhatsInt.Infrastructure\WhatsInt.Infrastructure.csproj" />
-    <ProjectReference Include="..\WhatsInt.Infrastructure\WhatsInt.Infrastructure.csproj" />
-    <ProjectReference Include="..\WhatsInt.Infrastructure\WhatsInt.Infrastructure.csproj" />
     <ProjectReference Include="..\WhatsInt.Model\WhatsInt.Model.csproj" />
   </ItemGroup>
 

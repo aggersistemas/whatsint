@@ -1,47 +1,49 @@
 ﻿using System.Net;
 using Infrastructure.Repository;
 using System.Security.Claims;
-using WhatsInt.Common.Helpers;
 using WhatsInt.Infrastructure.Entities;
 using WhatsInt.Infrastructure.Exceptions;
+using WhatsInt.Infrastructure.Helpers;
+using WhatsInt.Infrastructure.Resources;
 using WhatsInt.Interface.Helpers;
-using WhatsInt.Model;
+using WhatsInt.Model.Dto;
 
 namespace WhatsInt.Interface.Services
 {
     public class UserService
     {
         private readonly IRepository<User> _userRepository;
-        private readonly IHttpContextAccessor _context;
+        private readonly IHttpContextAccessor _httpContext;
 
-        public UserService(IRepository<User> userRepository, IHttpContextAccessor context)
+        public UserService(IRepository<User> userRepository, IHttpContextAccessor httpContext)
         {
             _userRepository = userRepository;
-            _context = context;
+
+            _httpContext = httpContext;
         }
 
-        public async Task<UserDto> Created(UserDto user)
+        public async Task<UserDto> Create(UserDto user)
         {
             var userFound = await FindUserByEmail(user.Email);
 
-            if (userFound != null) throw new AppException(HttpStatusCode.Conflict, "User already created");
+            if (userFound != null) throw new AppException(HttpStatusCode.Conflict, Messages.UserCreated);
 
             var userDomain = User.CreateOrUpdate(user.Name, user.Email, user.Password);
 
-            userDomain.Password = user.Password?.Encrypt();
-
             await _userRepository.Add(userDomain);
 
-            userDomain.Password = userDomain.Password!.DecryptToBase64();
+            var userDto = MapperHelper.Map<UserDto>(userDomain);
 
-            return MapperHelper.Map<UserDto>(userDomain);
+            userDto.Password = userDto.Password.Decrypt()?.Base64Encode();
+
+            return userDto;
         }
 
         internal async Task<UserDto> FindUserById(string id)
         {
             var userFound = await FindUser(id);
 
-            userFound!.Password = userFound.Password!.DecryptToBase64();
+            userFound!.Password = userFound.Password!.Decrypt()?.Base64Encode();
 
             return MapperHelper.Map<UserDto>(userFound);
         }
@@ -50,8 +52,7 @@ namespace WhatsInt.Interface.Services
         {
             var userFound = await _userRepository.FindOne(x => x.Id == id);
 
-            if (userFound == null)
-                throw new AppException(HttpStatusCode.NotFound, "User not found");
+            if (userFound == null)  throw new AppException(HttpStatusCode.NotFound, Messages.UserNotFound);
 
             return userFound;
         }
@@ -65,19 +66,19 @@ namespace WhatsInt.Interface.Services
 
         public async Task<UserDto> Update(UserDto user)
         {
-            var clientId = _context?.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.Name).Value ?? string.Empty;
+            var clientId = _httpContext.HttpContext?.User.Claims.First(c => c.Type == ClaimTypes.Name).Value ?? string.Empty;
 
             var userDomain = await FindUser(clientId);
 
             var userVerified = User.CreateOrUpdate(user.Name, user.Email, user.Password, userDomain.Id);
 
-            userDomain.Password = user.Password?.Encrypt();
-
             await _userRepository.Update(userVerified);
 
-            userVerified.Password = userVerified.Password!.DecryptToBase64();
+            var userDto = MapperHelper.Map<UserDto>(userDomain);
 
-            return MapperHelper.Map<UserDto>(userVerified);
+            userDto.Password = userDto.Password.Decrypt()?.Base64Encode();
+
+            return userDto;
         }
     }
 }
