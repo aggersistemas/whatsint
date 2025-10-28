@@ -1,0 +1,43 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '**'
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          
+      - name: Push to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_REPO: ${{ secrets.GITLAB_REPO }}
+        run: |
+          # Extrai o nome do repositório
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          GITLAB_URL="${GITLAB_REPO}/${REPO_NAME}.git"
+          
+          # Remove remote do GitLab se já existir
+          git remote remove gitlab 2>/dev/null || true
+          
+          # Adiciona o remote do GitLab
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@${GITLAB_URL}
+          
+          echo "🔄 Sincronizando ${REPO_NAME} para GitLab ${GITLAB_URL} ..."
+          git push gitlab --all --force
+          git push gitlab --tags --force
+          echo "✅ Sincronização concluída para ${GITLAB_URL}!"
